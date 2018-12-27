@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Tetris
 {
@@ -93,7 +94,14 @@ namespace Tetris
                         return;
                 }
 
-                input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
+                // construct thread
+                Thread inputThread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+
+                // start thread 
+                inputThread.Start();
+
+                // Without threads
+                //input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
                 CheckLine();
             }
         }

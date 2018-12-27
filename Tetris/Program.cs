@@ -13,7 +13,6 @@ namespace Tetris
         /// de instância para efectuar o ciclo de jogo
         /// </summary>
         /// <param name="args"></param>
-
         public static void Main(string[] args)
         {
             Game game = new Game();
