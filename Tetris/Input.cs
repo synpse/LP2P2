@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Diagnostics;
-using System.Media;
-using System.Resources;
-using System.IO;
-using System.Reflection;
 
 namespace Tetris
 {
     class Input
     {
-        public ConsoleKeyInfo key;
+        private ConsoleKeyInfo key;
 
-        public void Readkey(bool isKeyPressed, Piece tet)
+        public void Readkey(bool isKeyPressed, Piece tetromino, int[,] Grid, int[,] DroppedtetrominoeLocationGrid)
         {
             if (Console.KeyAvailable)
             {
@@ -26,38 +16,38 @@ namespace Tetris
             else
                 isKeyPressed = false;
 
-            if (key.Key == ConsoleKey.LeftArrow & !tet.isSomethingLeft() & isKeyPressed)
+            if (key.Key == ConsoleKey.LeftArrow & !tetromino.IsSomethingLeft(DroppedtetrominoeLocationGrid) & isKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    tet.Location[i][1] -= 1;
+                    tetromino.Location[i][1] -= 1;
                 }
-                tet.PositionUpdate(Game.grid, Game.droppedtetrominoeLocationGrid);
+                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
-            else if (key.Key == ConsoleKey.RightArrow & !tet.isSomethingRight() & isKeyPressed)
+            else if (key.Key == ConsoleKey.RightArrow & !tetromino.IsSomethingRight(DroppedtetrominoeLocationGrid) & isKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    tet.Location[i][1] += 1;
+                    tetromino.Location[i][1] += 1;
                 }
-                tet.PositionUpdate(Game.grid, Game.droppedtetrominoeLocationGrid);
+                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
             if (key.Key == ConsoleKey.DownArrow & isKeyPressed)
             {
-                tet.Drop(Game.grid, Game.droppedtetrominoeLocationGrid);
+                tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
             }
             if (key.Key == ConsoleKey.UpArrow & isKeyPressed)
             {
-                for (; tet.isSomethingBelow() != true;)
+                for (; tetromino.IsSomethingBelow(DroppedtetrominoeLocationGrid) != true;)
                 {
-                    tet.Drop(Game.grid, Game.droppedtetrominoeLocationGrid);
+                    tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
                 }
             }
             if (key.Key == ConsoleKey.Spacebar & isKeyPressed)
             {
                 //rotate
-                tet.Rotate();
-                tet.PositionUpdate(Game.grid, Game.droppedtetrominoeLocationGrid);
+                tetromino.Rotate(DroppedtetrominoeLocationGrid);
+                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
         }
     }

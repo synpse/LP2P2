@@ -8,22 +8,22 @@ namespace Tetris
 {
     class Piece : Tetromino
     {
-        Render render = new Render();
+        private Render render = new Render();
 
-        public void PositionUpdate(int[,] grid, int[,] droppedtetrominoeLocationGrid)
+        public void PositionUpdate(int[,] Grid, int[,] DroppedtetrominoeLocationGrid)
         {
             for (int i = 0; i < 23; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    Game.grid[i, j] = 0;
+                    Grid[i, j] = 0;
                 }
             }
             for (int i = 0; i < 4; i++)
             {
-                Game.grid[Location[i][0], Location[i][1]] = 1;
+                Grid[Location[i][0], Location[i][1]] = 1;
             }
-            render.Draw(grid, droppedtetrominoeLocationGrid);
+            render.Draw(Grid, DroppedtetrominoeLocationGrid);
         }
 
         public void Spawn(int[,] grid, int[,] droppedtetrominoeLocationGrid)
@@ -70,13 +70,13 @@ namespace Tetris
             PositionUpdate(grid, droppedtetrominoeLocationGrid);
         }
 
-        public void Drop(int[,] grid, int[,] droppedtetrominoeLocationGrid)
+        public void Drop(int[,] Grid, int[,] DroppedtetrominoeLocationGrid)
         {
-            if (isSomethingBelow())
+            if (IsSomethingBelow(DroppedtetrominoeLocationGrid))
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    Game.droppedtetrominoeLocationGrid[Location[i][0], Location[i][1]] = 1;
+                    DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1]] = 1;
                 }
                 Game.isDropped = true;
 
@@ -87,11 +87,11 @@ namespace Tetris
                 {
                     Location[numCount][0] += 1;
                 }
-                PositionUpdate(grid, droppedtetrominoeLocationGrid);
+                PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
         }
 
-        public void Rotate()
+        public void Rotate(int[,] DroppedtetrominoeLocationGrid)
         {
             List<int[]> templocation = new List<int[]>();
             for (int i = 0; i < Shape.GetLength(0); i++)
@@ -105,7 +105,7 @@ namespace Tetris
                 }
             }
 
-            if (Shape == tetrominoes[0])
+            if (Shape == Tetrominoes[0])
             {
                 if (IsErect == false)
                 {
@@ -123,7 +123,7 @@ namespace Tetris
                 }
             }
 
-            else if (Shape == tetrominoes[3])
+            else if (Shape == Tetrominoes[3])
             {
                 for (int i = 0; i < Location.Count; i++)
                 {
@@ -131,7 +131,7 @@ namespace Tetris
                 }
             }
 
-            else if (Shape == tetrominoes[1]) return;
+            else if (Shape == Tetrominoes[1]) return;
             else
             {
                 for (int i = 0; i < Location.Count; i++)
@@ -141,23 +141,25 @@ namespace Tetris
             }
 
 
-            for (int count = 0; isOverlayLeft(templocation) != false | isOverlayRight(templocation) != false | isOverlayBelow(templocation) != false; count++)
+            for (int count = 0; IsOverlayLeft(templocation, DroppedtetrominoeLocationGrid) != false 
+                | IsOverlayRight(templocation, DroppedtetrominoeLocationGrid) != false 
+                | IsOverlayBelow(templocation, DroppedtetrominoeLocationGrid) != false; count++)
             {
-                if (isOverlayLeft(templocation) == true)
+                if (IsOverlayLeft(templocation, DroppedtetrominoeLocationGrid) == true)
                 {
                     for (int i = 0; i < Location.Count; i++)
                     {
                         templocation[i][1] += 1;
                     }
                 }
-                if (isOverlayRight(templocation) == true)
+                if (IsOverlayRight(templocation, DroppedtetrominoeLocationGrid) == true)
                 {
                     for (int i = 0; i < Location.Count; i++)
                     {
                         templocation[i][1] -= 1;
                     }
                 }
-                if (isOverlayBelow(templocation) == true)
+                if (IsOverlayBelow(templocation, DroppedtetrominoeLocationGrid) == true)
                 {
                     for (int i = 0; i < Location.Count; i++)
                     {
@@ -189,7 +191,7 @@ namespace Tetris
             return new int[] { pcoord[0] + axis[0], pcoord[1] + axis[1] };
         }
 
-        public bool isSomethingBelow()
+        public bool IsSomethingBelow(int[,] DroppedtetrominoeLocationGrid)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -197,7 +199,7 @@ namespace Tetris
                     return true;
                 if (Location[i][0] + 1 < 23)
                 {
-                    if (Game.droppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
+                    if (DroppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
                     {
                         return true;
                     }
@@ -205,7 +207,7 @@ namespace Tetris
             }
             return false;
         }
-        public bool? isOverlayBelow(List<int[]> location)
+        public bool ? IsOverlayBelow(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
         {
             List<int> ycoords = new List<int>();
             for (int i = 0; i < 4; i++)
@@ -230,7 +232,7 @@ namespace Tetris
                 {
                     if (ycoords.Max() == location[i][0] | ycoords.Max() - 1 == location[i][0])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }
@@ -241,7 +243,7 @@ namespace Tetris
                 {
                     if (ycoords.Max() == location[i][0])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }
@@ -253,7 +255,7 @@ namespace Tetris
         }
 
 
-        public bool isSomethingLeft()
+        public bool IsSomethingLeft(int[,] DroppedtetrominoeLocationGrid)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -261,14 +263,14 @@ namespace Tetris
                 {
                     return true;
                 }
-                else if (Game.droppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
+                else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
                 {
                     return true;
                 }
             }
             return false;
         }
-        public bool? isOverlayLeft(List<int[]> location)
+        public bool ? IsOverlayLeft(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
         {
             List<int> xcoords = new List<int>();
             for (int i = 0; i < 4; i++)
@@ -293,7 +295,7 @@ namespace Tetris
                 {
                     if (xcoords.Min() == location[i][1] | xcoords.Min() + 1 == location[i][1])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }
@@ -304,7 +306,7 @@ namespace Tetris
                 {
                     if (xcoords.Min() == location[i][1])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }
@@ -313,7 +315,7 @@ namespace Tetris
             }
             return false;
         }
-        public bool isSomethingRight()
+        public bool IsSomethingRight(int[,] DroppedtetrominoeLocationGrid)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -321,14 +323,14 @@ namespace Tetris
                 {
                     return true;
                 }
-                else if (Game.droppedtetrominoeLocationGrid[Location[i][0], Location[i][1] + 1] == 1)
+                else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] + 1] == 1)
                 {
                     return true;
                 }
             }
             return false;
         }
-        public bool? isOverlayRight(List<int[]> location)
+        public bool ? IsOverlayRight(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
         {
             List<int> xcoords = new List<int>();
             for (int i = 0; i < 4; i++)
@@ -353,7 +355,7 @@ namespace Tetris
                 {
                     if (xcoords.Max() == location[i][1] | xcoords.Max() - 1 == location[i][1])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }
@@ -363,7 +365,7 @@ namespace Tetris
                 {
                     if (xcoords.Max() == location[i][1])
                     {
-                        if (Game.droppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
+                        if (DroppedtetrominoeLocationGrid[location[i][0], location[i][1]] == 1)
                         {
                             return true;
                         }

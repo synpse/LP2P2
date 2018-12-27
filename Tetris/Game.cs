@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Diagnostics;
-using System.Media;
-using System.Resources;
-using System.IO;
-using System.Reflection;
 
 namespace Tetris
 {
     class Game
     {
-        public static int[,] grid = new int[23, 10];
-        public static int[,] droppedtetrominoeLocationGrid = new int[23, 10];
+        public int[,] Grid { get; } = new int[23, 10];
+        public int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
         private Stopwatch timer = new Stopwatch();
         private Stopwatch dropTimer = new Stopwatch();
-        private Stopwatch inputTimer = new Stopwatch();
+        private readonly Stopwatch inputTimer = new Stopwatch();
         public int dropTime, dropRate;
         public static bool isDropped = false;
-        public Piece tet;
-        public Piece nexttet;
+        public Piece tetromino;
+        public Piece nextTetromino;
         public bool isKeyPressed = false;
         public int linesCleared = 0, score = 0, level = 1;
         Input input = new Input();
@@ -46,10 +37,10 @@ namespace Tetris
             Console.SetCursorPosition(25, 2);
             Console.WriteLine("LinesCleared " + linesCleared);
 
-            nexttet = new Piece();
-            tet = nexttet;
-            tet.Spawn(grid, droppedtetrominoeLocationGrid);
-            nexttet = new Piece();
+            nextTetromino = new Piece();
+            tetromino = nextTetromino;
+            tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
+            nextTetromino = new Piece();
 
             Update();
 
@@ -67,7 +58,7 @@ namespace Tetris
                 }
                 else if (input == "n")
                 {
-                    System.Environment.Exit(1);
+                    Environment.Exit(1);
                 }
                 Console.Clear();
             } while (true);
@@ -85,24 +76,24 @@ namespace Tetris
                 {
                     dropTime = 0;
                     dropTimer.Restart();
-                    tet.Drop(grid, droppedtetrominoeLocationGrid);
+                    tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
                 }
                 if (isDropped == true)
                 {
-                    tet = nexttet;
-                    nexttet = new Piece();
-                    tet.Spawn(grid, droppedtetrominoeLocationGrid);
+                    tetromino = nextTetromino;
+                    nextTetromino = new Piece();
+                    tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
 
                     isDropped = false;
                 }
                 int j;
                 for (j = 0; j < 10; j++)
                 {
-                    if (droppedtetrominoeLocationGrid[0, j] == 1)
+                    if (DroppedtetrominoeLocationGrid[0, j] == 1)
                         return;
                 }
 
-                input.Readkey(isKeyPressed, tet);
+                input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
                 CheckLine();
             }
         }
@@ -115,7 +106,7 @@ namespace Tetris
                 int j;
                 for (j = 0; j < 10; j++)
                 {
-                    if (droppedtetrominoeLocationGrid[i, j] == 0)
+                    if (DroppedtetrominoeLocationGrid[i, j] == 0)
                         break;
                 }
                 if (j == 10)
@@ -143,49 +134,42 @@ namespace Tetris
             else if (linesCleared < 110) level = 9;
             else if (linesCleared < 150) level = 10;
 
-
-            if (combo > 0)
-            {
-                Console.SetCursorPosition(25, 0);
-                Console.WriteLine("Level " + level);
-                Console.SetCursorPosition(25, 1);
-                Console.WriteLine("Score " + score);
-                Console.SetCursorPosition(25, 2);
-                Console.WriteLine("LinesCleared " + linesCleared);
-            }
-
+            // Increase the drop rate with level
             dropRate = 300 - 22 * level;
-
         }
 
         public void ClearLine(int combo, int i, int j)
         {
             linesCleared++;
             combo++;
+
+            // Update score and level
+            render.DrawScoreAndLevel(level, score, linesCleared);
+
             for (j = 0; j < 10; j++)
             {
-                droppedtetrominoeLocationGrid[i, j] = 0;
+                DroppedtetrominoeLocationGrid[i, j] = 0;
             }
             int[,] newdroppedtetrominoeLocationGrid = new int[23, 10];
             for (int k = 1; k < i; k++)
             {
                 for (int l = 0; l < 10; l++)
                 {
-                    newdroppedtetrominoeLocationGrid[k + 1, l] = droppedtetrominoeLocationGrid[k, l];
+                    newdroppedtetrominoeLocationGrid[k + 1, l] = DroppedtetrominoeLocationGrid[k, l];
                 }
             }
             for (int k = 1; k < i; k++)
             {
                 for (int l = 0; l < 10; l++)
                 {
-                    droppedtetrominoeLocationGrid[k, l] = 0;
+                    DroppedtetrominoeLocationGrid[k, l] = 0;
                 }
             }
             for (int k = 0; k < 23; k++)
                 for (int l = 0; l < 10; l++)
                     if (newdroppedtetrominoeLocationGrid[k, l] == 1)
-                        droppedtetrominoeLocationGrid[k, l] = 1;
-            render.Draw(grid, droppedtetrominoeLocationGrid);
+                        DroppedtetrominoeLocationGrid[k, l] = 1;
+            render.Draw(Grid, DroppedtetrominoeLocationGrid);
         }
     }
 }
