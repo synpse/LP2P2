@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates Tetronimo Class
+    /// </summary>
     public class Tetromino
     {
         public static int[,] I { get; } = new int[1, 4] { { 1, 1, 1, 1 } };
@@ -27,6 +30,9 @@ namespace Tetris
         private readonly Square square = new Square();
 
         // Build a new random tetromino
+        /// <summary>
+        /// Creates Tetronimo Constructor
+        /// </summary>
         public Tetromino()
         {
             // New random

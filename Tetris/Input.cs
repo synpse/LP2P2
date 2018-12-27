@@ -2,10 +2,20 @@
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates Input Class
+    /// </summary>
     class Input
     {
         private ConsoleKeyInfo key;
 
+        /// <summary>
+        /// Creates ReadKey Method
+        /// </summary>
+        /// <param name="isKeyPressed"></param>
+        /// <param name="tetromino"></param>
+        /// <param name="Grid"></param>
+        /// <param name="DroppedtetrominoeLocationGrid"></param>
         public void Readkey(bool isKeyPressed, Piece tetromino, int[,] Grid, int[,] DroppedtetrominoeLocationGrid)
         {
             if (Console.KeyAvailable)

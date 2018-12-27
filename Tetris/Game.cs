@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates Game Class to start everything
+    /// </summary>
     class Game
     {
         public int[,] Grid { get; } = new int[23, 10];
@@ -19,9 +22,13 @@ namespace Tetris
         public int linesCleared = 0, score = 0, level = 1;
         Input input = new Input();
         Render render = new Render();
-
+        
+        /// <summary>
+        /// Creates method Start
+        /// </summary>
         public void Start()
         {
+            
             render.DrawBorder();
             Console.SetCursorPosition(4, 5);
             Console.WriteLine("Press any key");
@@ -42,7 +49,7 @@ namespace Tetris
             tetromino = nextTetromino;
             tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
             nextTetromino = new Piece();
-
+            
             Update();
 
             Console.SetCursorPosition(0, 0);
@@ -62,11 +69,13 @@ namespace Tetris
                     Environment.Exit(1);
                 }
                 Console.Clear();
-            } while (true);
+            }while (true);  
             
-
         }
 
+        /// <summary>
+        /// Creates GameLoop
+        /// </summary>
         public void Update()
         {
             // Gameloop
@@ -86,18 +95,15 @@ namespace Tetris
                     tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
 
                     isDropped = false;
-                }
-                int j;
-                for (j = 0; j < 10; j++)
+                }               
+                for (int j = 0; j < 10; j++)
                 {
                     if (DroppedtetrominoeLocationGrid[0, j] == 1)
                         return;
                 }
-
-                // construct thread
+                
                 Thread inputThread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
 
-                // start thread 
                 inputThread.Start();
 
                 // Without threads
@@ -105,7 +111,10 @@ namespace Tetris
                 CheckLine();
             }
         }
-
+        
+        /// <summary>
+        /// Creates CheckLine Method
+        /// </summary>
         public void CheckLine()
         {
             int combo = 0;
@@ -146,6 +155,12 @@ namespace Tetris
             dropRate = 300 - 22 * level;
         }
 
+        /// <summary>
+        /// Creates ClearLine method
+        /// </summary>
+        /// <param name="combo"></param>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
         public void ClearLine(int combo, int i, int j)
         {
             linesCleared++;

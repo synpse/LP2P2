@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates Render Class
+    /// </summary>
     class Render
     {
         private Square square = new Square();
 
+        /// <summary>
+        /// Creates Draw Method
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="droppedtetrominoeLocationGrid"></param>
         public void Draw(int[,] grid, int[,] droppedtetrominoeLocationGrid)
         {
             for (int i = 0; i < 23; ++i)
@@ -32,6 +40,9 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates DrawBorder Method
+        /// </summary>
         public void DrawBorder()
         {
             for (int lengthCount = 0; lengthCount <= 22; ++lengthCount)
@@ -48,6 +59,9 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates ClearOldTetronimo Method
+        /// </summary>
         public void ClearOldTetromino()
         {
             // Draw New tetromino on GUI
@@ -62,6 +76,10 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates DrawNewTetronimo Method
+        /// </summary>
+        /// <param name="Shape"></param>
         public void DrawNewTetromino(int[,] Shape)
         {
             for (int i = 0; i < Shape.GetLength(0); i++)
@@ -107,6 +125,12 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates DrawScoreAndLevel Method
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="score"></param>
+        /// <param name="linesCleared"></param>
         public void DrawScoreAndLevel(int level, int score, int linesCleared)
         {
             Console.SetCursorPosition(25, 0);
