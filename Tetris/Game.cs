@@ -23,7 +23,6 @@ namespace Tetris
         public static bool isDropped = false;
         public Piece tet;
         public Piece nexttet;
-        //public ConsoleKeyInfo key;
         public bool isKeyPressed = false;
         public int linesCleared = 0, score = 0, level = 1;
         Input input = new Input();
@@ -31,18 +30,10 @@ namespace Tetris
 
         public void Start()
         {
-            //SoundPlayer sp = new SoundPlayer();
-            //sp.SoundLocation = Environment.CurrentDirectory + "\\01_-_Tetris_Tengen_-_NES_-_Introduction.wav";
-            //sp.PlayLooping();
-
             render.DrawBorder();
             Console.SetCursorPosition(4, 5);
             Console.WriteLine("Press any key");
             Console.ReadKey(true);
-
-            //sp.Stop();
-            //sp.SoundLocation = Environment.CurrentDirectory + "\\music.wav";
-            //sp.PlayLooping();
 
             timer.Start();
             dropTimer.Start();
@@ -62,9 +53,6 @@ namespace Tetris
 
             Update();
 
-            //sp.Stop();
-            //sp.SoundLocation = Environment.CurrentDirectory + "\\08_-_Tetris_Tengen_-_NES_-_Game_Over.wav";
-            //sp.Play();
             Console.SetCursorPosition(0, 0);
             Console.Clear();
 
@@ -114,7 +102,6 @@ namespace Tetris
                         return;
                 }
 
-                //input.Readkey(isKeyPressed, tet, key);
                 input.Readkey(isKeyPressed, tet);
                 CheckLine();
             }
