@@ -1,0 +1,21 @@
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\bin\Debug\Tetris.pdb
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\obj\Debug\Tetris.exe
+C:\Users\Tiago Alves\Desktop\Tetris\Tetris\obj\Debug\Tetris.pdb
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\bin\Debug\Tetris.pdb
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\obj\Debug\Tetris.exe
+C:\Users\Diogo Maia\Desktop\Tetris\Tetris\obj\Debug\Tetris.pdb
+C:\Users\Synpse\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\Synpse\Desktop\Tetris\Tetris\bin\Debug\Tetris.exe
+C:\Users\Synpse\Desktop\Tetris\Tetris\bin\Debug\Tetris.pdb
+C:\Users\Synpse\Desktop\Tetris\Tetris\obj\Debug\Tetris.csprojAssemblyReference.cache
+C:\Users\Synpse\Desktop\Tetris\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\Synpse\Desktop\Tetris\Tetris\obj\Debug\Tetris.exe
+C:\Users\Synpse\Desktop\Tetris\Tetris\obj\Debug\Tetris.pdb
