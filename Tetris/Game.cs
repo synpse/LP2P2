@@ -26,7 +26,9 @@ namespace Tetris
         private readonly Difficulty difficulty = new Difficulty();
         private readonly MainMenu mainMenu = new MainMenu();
         private GameOver gameOver = new GameOver();
-        
+        //public int i;
+        private bool ThreadRunning = false;
+
         /// <summary>
         /// Creates method Start
         /// </summary>
@@ -62,6 +64,9 @@ namespace Tetris
         /// </summary>
         public void Update(int difficultyLevel)
         {
+
+            Thread thread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+
             // Gameloop
             while (true)
             {
@@ -86,15 +91,27 @@ namespace Tetris
                         return;
                 }
                 
-                //Thread inputThread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+                if (ThreadRunning == false)
+                {
+                    thread.Start();
+                    ThreadRunning = true;
+                }
+                else
+                {
+                    thread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+                    ThreadRunning = false;
+                }
 
-                //inputThread.Start();
-
-                // Without threads
-                input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
                 CheckLine(difficultyLevel);
+
             }
         }
+
+
+        /*public void TestCancer()
+        {            
+            input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
+        }*/
         
         /// <summary>
         /// Creates CheckLine Method
