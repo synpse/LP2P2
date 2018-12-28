@@ -21,11 +21,11 @@ namespace Tetris
         public bool isKeyPressed = false;
         public int linesCleared = 0, score = 0, level = 1;
         public int combo = 0;
-        Input input = new Input();
-        Render render = new Render();
-        Difficulty difficulty = new Difficulty();
-        MainMenu mainMenu = new MainMenu();
-        GameOver gameOver = new GameOver();
+        private Input input = new Input();
+        private Render render = new Render();
+        private readonly Difficulty difficulty = new Difficulty();
+        private readonly MainMenu mainMenu = new MainMenu();
+        private GameOver gameOver = new GameOver();
         
         /// <summary>
         /// Creates method Start
@@ -54,7 +54,7 @@ namespace Tetris
 
             Console.Clear();
 
-            gameOver.Display(score);
+            gameOver.Display(score, difficultyLevel);
         }
 
         /// <summary>

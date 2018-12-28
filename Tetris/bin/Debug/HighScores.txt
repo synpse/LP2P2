@@ -1,6 +1,4 @@
 Name:Score
-ArrayDeApontadoresParaRecurso:2380
-Recurso:1160
-Recurso:0
-Recurso:0
-Kek:0
+Recursividade de Recursos:12260:1
+Array de Apontadores Para Recurso:1420:2
+Recurso:260:3

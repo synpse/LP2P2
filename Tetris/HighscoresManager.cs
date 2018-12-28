@@ -6,7 +6,7 @@ namespace Tetris
 {
     public class HighscoresManager
     {
-        private List<Tuple<string, float>> highscores;
+        private List<Tuple<string, float, string>> highscores;
 
         private string filename = "";
 
@@ -20,7 +20,7 @@ namespace Tetris
             ///o nome e a pontuação do jogador.
             if (!File.Exists(filename))
             {
-                highscores = new List<Tuple<string, float>>(10);
+                highscores = new List<Tuple<string, float, string>>(10);
             }
 
             ///Se o ficherio existe irá efectuar o seguinte código.
@@ -28,7 +28,7 @@ namespace Tetris
             {
 
                 ///inicializa a lista.
-                highscores = new List<Tuple<string, float>>(10);
+                highscores = new List<Tuple<string, float, string>>(10);
 
                 ///Lê todas as linhas do ficheiro obtido.
                 string[] text = File.ReadAllLines(filename);
@@ -42,7 +42,7 @@ namespace Tetris
 
                     ///Se o formato pedido estiver incorrecto ou a substring não
                     ///for possível converter em float.
-                    if (subStrings.Length != 2 ||
+                    if (subStrings.Length != 3 ||
                         !Single.TryParse(subStrings[1], out float score))
                     {
 
@@ -53,9 +53,10 @@ namespace Tetris
 
                     ///Salva o nome da primeira substring.
                     string name = subStrings[0];
+                    string difficulty = subStrings[2];
 
                     ///Adiciona a nova melhor pontuação a lista
-                    highscores.Add(new Tuple<string, float>(name, score));
+                    highscores.Add(new Tuple<string, float, string>(name, score, difficulty));
                 }
 
                 ///Ordena a lista de forma descendente. 
@@ -63,10 +64,10 @@ namespace Tetris
             }
         }
 
-        public void AddScore(string name, float score)
+        public void AddScore(string name, float score, string difficulty)
         {
             ///Cria e instância um novo objecto que guarda a nova pontuação.
-            Tuple<string, float> newScore = new Tuple<string, float>(name, score);
+            Tuple<string, float, string> newScore = new Tuple<string, float, string>(name, score, difficulty);
 
             /// Adiciona o nova melhor pontuação a lista.
             highscores.Add(newScore);
@@ -88,20 +89,20 @@ namespace Tetris
             string text = "Name:Score\n";
 
             ///Para cada elemento na lista
-            foreach (Tuple<string, float> highscore in highscores)
+            foreach (Tuple<string, float, string> highscore in highscores)
             {
                 ///Adiciona o nome e pontuação
-                text += $"{highscore.Item1}:{highscore.Item2}\n";
+                text += $"{highscore.Item1}:{highscore.Item2}:{highscore.Item3}\n";
             }
 
             ///Escreve tudo o que obteve com o foreach no ficheiro indicado .txt.
             File.WriteAllText(filename, text);
         }
 
-        public IEnumerable<Tuple<string, float>> GetScores()
+        public IEnumerable<Tuple<string, float, string>> GetScores()
         {
             ///Pecorre todas as pontuações na lista.
-            foreach (Tuple<string, float> highscore in highscores)
+            foreach (Tuple<string, float, string> highscore in highscores)
             {
                 ///Retorna todas as pontuações que encontrar na lista.
                 yield return highscore;
@@ -118,7 +119,7 @@ namespace Tetris
                     ///Utiliza o algoritmo Bubble Sort para ordenar a lista.
                     if (highscores[j].Item2 < highscores[i].Item2)
                     {
-                        Tuple<string, float> temp = highscores[i];
+                        Tuple<string, float, string> temp = highscores[i];
                         highscores[i] = highscores[j];
                         highscores[j] = temp;
                     }

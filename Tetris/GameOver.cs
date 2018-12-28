@@ -12,7 +12,7 @@ namespace Tetris
         Difficulty difficulty = new Difficulty();
         MainMenu mainMenu = new MainMenu();
 
-        public void Display(int score)
+        public void Display(int score, int difficultyLevel)
         {
             Console.Clear();
             Console.SetCursorPosition(55, 2);
@@ -29,7 +29,7 @@ namespace Tetris
                 Console.Write("Insert your name here: ");
                 string name = Console.ReadLine();
                 // Add score and name
-                hsm.AddScore(name, score);
+                hsm.AddScore(name, score, difficultyLevel.ToString());
                 // Save to file
                 hsm.Save();
 

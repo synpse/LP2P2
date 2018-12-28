@@ -17,11 +17,11 @@ namespace Tetris
             int row = 4;
 
             ///Pecorre o ficheiro .txt e imprimi o nome e o respectivo score.
-            foreach (Tuple<string, float> highscore in hsm.GetScores())
+            foreach (Tuple<string, float, string> highscore in hsm.GetScores())
             {
                 row++;
-                Console.SetCursorPosition(32, row);
-                Console.WriteLine($"Name: {highscore.Item1,-40}" + $"Score: {highscore.Item2}");
+                Console.SetCursorPosition(20, row);
+                Console.WriteLine($"Name: {highscore.Item1,-40}" + $"Difficulty: {highscore.Item3, - 10}" + $"Score: {highscore.Item2}");
             }
 
             Console.SetCursorPosition(48, 20);

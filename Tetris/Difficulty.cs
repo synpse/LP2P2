@@ -18,9 +18,8 @@ namespace Tetris
         {
             Game game = new Game();
 
-            //Credits credits = new Credits();
-
-            //HighScores highScores = new HighScores();
+            // Collect garbage at the beggining of every game
+            GC.Collect();
 
             List<string> menuLines = new List<string>() {
                 "   Easy         ",
