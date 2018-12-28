@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Credits.cs" />
     <Compile Include="Difficulty.cs" />
+    <Compile Include="GameOver.cs" />
+    <Compile Include="Highscores.cs" />
+    <Compile Include="HighscoresManager.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MainMenu.cs" />

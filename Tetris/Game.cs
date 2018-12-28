@@ -20,10 +20,12 @@ namespace Tetris
         public Piece nextTetromino;
         public bool isKeyPressed = false;
         public int linesCleared = 0, score = 0, level = 1;
+        public int combo = 0;
         Input input = new Input();
         Render render = new Render();
         Difficulty difficulty = new Difficulty();
         MainMenu mainMenu = new MainMenu();
+        GameOver gameOver = new GameOver();
         
         /// <summary>
         /// Creates method Start
@@ -40,12 +42,8 @@ namespace Tetris
             dropTimer.Start();
             long time = timer.ElapsedMilliseconds;
 
-            Console.SetCursorPosition(25, 0);
-            Console.WriteLine("Level " + level);
-            Console.SetCursorPosition(25, 1);
-            Console.WriteLine("Score " + score);
-            Console.SetCursorPosition(25, 2);
-            Console.WriteLine("LinesCleared " + linesCleared);
+            // Update score and level
+            render.DrawScoreAndLevel(level, score, linesCleared, combo);
 
             nextTetromino = new Piece();
             tetromino = nextTetromino;
@@ -54,21 +52,9 @@ namespace Tetris
             
             Update(difficultyLevel);
 
-            Console.SetCursorPosition(0, 0);
             Console.Clear();
 
-            Console.WriteLine("Game Over! Replay? (Y/N)");
-            string input = Console.ReadLine().ToLower();
-
-            if (input == "y")
-            {
-                difficulty.Display();
-            }
-            else if (input == "n")
-            {
-                mainMenu.Display();
-            }
-            Console.Clear();
+            gameOver.Display(score);
         }
 
         /// <summary>
@@ -115,28 +101,37 @@ namespace Tetris
         /// </summary>
         public void CheckLine(int difficultyLevel)
         {
-            int combo = 0;
             for (int i = 0; i < 23; i++)
             {
                 int j;
                 for (j = 0; j < 10; j++)
                 {
                     if (DroppedtetrominoeLocationGrid[i, j] == 0)
+                    {
+                        combo = 0;
                         break;
+                    }
                 }
                 if (j == 10)
                 {
+                    combo++;
+                    linesCleared++;
+
+                    if (combo == 1)
+                        score += 40 * level;
+                    else if (combo == 2)
+                        score += 100 * level;
+                    else if (combo == 3)
+                        score += 300 * level;
+                    else if (combo > 3)
+                        score += 300 * combo * level;
+
                     ClearLine(combo, i, j);
+
+                    // Update score and level
+                    render.DrawScoreAndLevel(level, score, linesCleared, combo);
                 }
             }
-            if (combo == 1)
-                score += 40 * level;
-            else if (combo == 2)
-                score += 100 * level;
-            else if (combo == 3)
-                score += 300 * level;
-            else if (combo > 3)
-                score += 300 * combo * level;
 
             if (linesCleared < 5) level = 1;
             else if (linesCleared < 10) level = 2;
@@ -161,17 +156,13 @@ namespace Tetris
         /// <param name="j"></param>
         public void ClearLine(int combo, int i, int j)
         {
-            linesCleared++;
-            combo++;
-
-            // Update score and level
-            render.DrawScoreAndLevel(level, score, linesCleared);
-
             for (j = 0; j < 10; j++)
             {
                 DroppedtetrominoeLocationGrid[i, j] = 0;
             }
+
             int[,] newdroppedtetrominoeLocationGrid = new int[23, 10];
+
             for (int k = 1; k < i; k++)
             {
                 for (int l = 0; l < 10; l++)
@@ -179,6 +170,7 @@ namespace Tetris
                     newdroppedtetrominoeLocationGrid[k + 1, l] = DroppedtetrominoeLocationGrid[k, l];
                 }
             }
+
             for (int k = 1; k < i; k++)
             {
                 for (int l = 0; l < 10; l++)
@@ -186,10 +178,14 @@ namespace Tetris
                     DroppedtetrominoeLocationGrid[k, l] = 0;
                 }
             }
+
             for (int k = 0; k < 23; k++)
                 for (int l = 0; l < 10; l++)
                     if (newdroppedtetrominoeLocationGrid[k, l] == 1)
+                    {
                         DroppedtetrominoeLocationGrid[k, l] = 1;
+                    }
+
             render.Draw(Grid, DroppedtetrominoeLocationGrid);
         }
     }

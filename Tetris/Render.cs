@@ -131,14 +131,16 @@ namespace Tetris
         /// <param name="level"></param>
         /// <param name="score"></param>
         /// <param name="linesCleared"></param>
-        public void DrawScoreAndLevel(int level, int score, int linesCleared)
+        public void DrawScoreAndLevel(int level, int score, int linesCleared, int combo)
         {
             Console.SetCursorPosition(25, 0);
-            Console.WriteLine("Level " + level);
+            Console.WriteLine("Level: " + level);
             Console.SetCursorPosition(25, 1);
-            Console.WriteLine("Score " + score);
+            Console.WriteLine("Score: " + score);
             Console.SetCursorPosition(25, 2);
-            Console.WriteLine("LinesCleared " + linesCleared);
+            Console.WriteLine("LinesCleared: " + linesCleared);
+            Console.SetCursorPosition(45, 2);
+            Console.WriteLine("Combo: " + combo);
         }
     }
 }

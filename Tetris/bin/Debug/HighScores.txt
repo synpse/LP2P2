@@ -1,0 +1,6 @@
+Name:Score
+ArrayDeApontadoresParaRecurso:2380
+Recurso:1160
+Recurso:0
+Recurso:0
+Kek:0

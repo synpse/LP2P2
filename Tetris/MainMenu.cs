@@ -16,6 +16,8 @@ namespace Tetris
         public void Display()
         {
             Difficulty difficulty = new Difficulty();
+            Credits credits = new Credits();
+            Highscores highscores = new Highscores();
 
             //Credits credits = new Credits();
 
@@ -45,15 +47,13 @@ namespace Tetris
                 else if (selected == "   High Scores  ")
                 {
                     Console.Clear();
-
-                    //highScores.Print();
+                    highscores.Display();
                     Console.Clear();
                 }
                 else if (selected == "   Credits      ")
                 {
                     Console.Clear();
-
-                    //credits.Print();
+                    credits.Display();
                     Console.Clear();
                 }
                 else if (selected == "   Quit         ")
