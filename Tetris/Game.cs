@@ -26,7 +26,7 @@ namespace Tetris
         /// <summary>
         /// Creates method Start
         /// </summary>
-        public void Start()
+        public void Start(int difficulty)
         {
             
             render.DrawBorder();
@@ -50,7 +50,7 @@ namespace Tetris
             tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
             nextTetromino = new Piece();
             
-            Update();
+            Update(difficulty);
 
             Console.SetCursorPosition(0, 0);
             Console.Clear();
@@ -76,7 +76,7 @@ namespace Tetris
         /// <summary>
         /// Creates GameLoop
         /// </summary>
-        public void Update()
+        public void Update(int difficulty)
         {
             // Gameloop
             while (true)
@@ -108,14 +108,14 @@ namespace Tetris
 
                 // Without threads
                 input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
-                CheckLine();
+                CheckLine(difficulty);
             }
         }
         
         /// <summary>
         /// Creates CheckLine Method
         /// </summary>
-        public void CheckLine()
+        public void CheckLine(int difficulty)
         {
             int combo = 0;
             for (int i = 0; i < 23; i++)
@@ -152,7 +152,7 @@ namespace Tetris
             else if (linesCleared < 150) level = 10;
 
             // Increase the drop rate with level
-            dropRate = 300 - 22 * level;
+            dropRate = (300 / difficulty) - 22 * level;
         }
 
         /// <summary>

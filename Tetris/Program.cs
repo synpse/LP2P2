@@ -15,12 +15,12 @@ namespace Tetris
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            Game game = new Game();
+            MainMenu mainMenu = new MainMenu();
 
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
 
-            game.Start();
+            mainMenu.Display();
         }
     }
 }
