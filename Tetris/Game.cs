@@ -152,7 +152,7 @@ namespace Tetris
             else if (linesCleared < 150) level = 10;
 
             // Increase the drop rate with level
-            dropRate = (300 / difficulty) - 22 * level;
+            dropRate = (900 / difficulty) - 22 * level;
         }
 
         /// <summary>
