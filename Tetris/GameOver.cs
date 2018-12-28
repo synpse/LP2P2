@@ -62,7 +62,7 @@ namespace Tetris
                 Console.Write($"Do you want to retry? (Y/N): ");
                 string input2 = Console.ReadLine().ToLower();
 
-                if (input == "y")
+                if (input2 == "y")
                 {
                     difficulty.Display();
                 }
