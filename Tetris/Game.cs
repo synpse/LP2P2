@@ -22,11 +22,13 @@ namespace Tetris
         public int linesCleared = 0, score = 0, level = 1;
         Input input = new Input();
         Render render = new Render();
+        Difficulty difficulty = new Difficulty();
+        MainMenu mainMenu = new MainMenu();
         
         /// <summary>
         /// Creates method Start
         /// </summary>
-        public void Start(int difficulty)
+        public void Start(int difficultyLevel)
         {
             
             render.DrawBorder();
@@ -50,33 +52,29 @@ namespace Tetris
             tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
             nextTetromino = new Piece();
             
-            Update(difficulty);
+            Update(difficultyLevel);
 
             Console.SetCursorPosition(0, 0);
             Console.Clear();
 
-            do
-            {
-                Console.WriteLine("Game Over \n Replay? (Y/N)");
-                string input = Console.ReadLine().ToLower();
+            Console.WriteLine("Game Over! Replay? (Y/N)");
+            string input = Console.ReadLine().ToLower();
 
-                if (input == "y")
-                {
-                    return;
-                }
-                else if (input == "n")
-                {
-                    Environment.Exit(1);
-                }
-                Console.Clear();
-            } while (true);  
-            
+            if (input == "y")
+            {
+                difficulty.Display();
+            }
+            else if (input == "n")
+            {
+                mainMenu.Display();
+            }
+            Console.Clear();
         }
 
         /// <summary>
         /// Creates GameLoop
         /// </summary>
-        public void Update(int difficulty)
+        public void Update(int difficultyLevel)
         {
             // Gameloop
             while (true)
@@ -108,14 +106,14 @@ namespace Tetris
 
                 // Without threads
                 input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
-                CheckLine(difficulty);
+                CheckLine(difficultyLevel);
             }
         }
         
         /// <summary>
         /// Creates CheckLine Method
         /// </summary>
-        public void CheckLine(int difficulty)
+        public void CheckLine(int difficultyLevel)
         {
             int combo = 0;
             for (int i = 0; i < 23; i++)
@@ -152,7 +150,7 @@ namespace Tetris
             else if (linesCleared < 150) level = 10;
 
             // Increase the drop rate with level
-            dropRate = (900 / difficulty) - 22 * level;
+            dropRate = (400 / difficultyLevel) - 22 * level;
         }
 
         /// <summary>

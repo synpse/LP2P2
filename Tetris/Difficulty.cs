@@ -9,7 +9,7 @@ namespace Tetris
     class Difficulty
     {
         private int selectedLine = 0;
-        public int difficulty;
+        public int difficultyLevel;
 
         /// <summary>
         /// Method that adds functionality to the menu.
@@ -39,32 +39,32 @@ namespace Tetris
                 if (selected == "   Easy         ")
                 {
                     Console.Clear();
-                    difficulty = 1;
-                    game.Start(difficulty);
+                    difficultyLevel = 1;
+                    game.Start(difficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Medium       ")
                 {
                     Console.Clear();
-                    difficulty = 2;
-                    game.Start(difficulty);
+                    difficultyLevel = 2;
+                    game.Start(difficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Hard         ")
                 {
                     Console.Clear();
-                    difficulty = 3;
-                    game.Start(difficulty);
+                    difficultyLevel = 3;
+                    game.Start(difficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Expert       ")
                 {
                     Console.Clear();
-                    difficulty = 4;
-                    game.Start(difficulty);
+                    difficultyLevel = 4;
+                    game.Start(difficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
