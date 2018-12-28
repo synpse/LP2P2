@@ -227,17 +227,25 @@ namespace Tetris
         /// <returns></returns>
         public bool IsSomethingBelow(int[,] DroppedtetrominoeLocationGrid)
         {
-            for (int i = 0; i < 4; i++)
+            try
             {
-                if (Location[i][0] + 1 >= 23)
-                    return true;
-                if (Location[i][0] + 1 < 23)
+                for (int i = 0; i < 4; i++)
                 {
-                    if (DroppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
-                    {
+                    if (Location[i][0] + 1 >= 23)
                         return true;
+                    if (Location[i][0] + 1 < 23)
+                    {
+                        if (DroppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
+                        {
+                            return true;
+                        }
                     }
                 }
+                return false;
+            }
+            catch
+            {
+
             }
             return false;
         }
@@ -302,18 +310,34 @@ namespace Tetris
         /// <returns></returns>
         public bool IsSomethingLeft(int[,] DroppedtetrominoeLocationGrid)
         {
-            for (int i = 0; i < 4; i++)
+            try
             {
-                if (Location[i][1] == 0)
+                for (int i = 0; i < 4; i++)
                 {
-                    return true;
+                    //Console.WriteLine(i);
+                    if (Location[i][1] == 0)
+                    {
+                        return true;
+                    }
+                    else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
+                    {
+                        return true;
+                    }
+                    if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
+                    {
+                        return true;
+                    }
                 }
-                else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
-                {
-                    return true;
-                }
+                return false;
             }
+            catch
+            {
+                
+            }
+
             return false;
+
+
         }
 
         /// <summary>
@@ -375,18 +399,28 @@ namespace Tetris
         /// <returns></returns>
         public bool IsSomethingRight(int[,] DroppedtetrominoeLocationGrid)
         {
-            for (int i = 0; i < 4; i++)
+            try
             {
-                if (Location[i][1] == 9)
+                for (int i = 0; i < 4; i++)
                 {
-                    return true;
+                    if (Location[i][1] == 9)
+                    {
+                        return true;
+                    }
+                    else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] + 1] == 1)
+                    {
+                        return true;
+                    }
                 }
-                else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] + 1] == 1)
-                {
-                    return true;
-                }
+                return false;
             }
+            catch
+            {
+
+            }
+
             return false;
+
         }
 
         /// <summary>

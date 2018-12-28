@@ -9,16 +9,16 @@ namespace Tetris
     /// </summary>
     class Game
     {
-        public int[,] Grid { get; } = new int[23, 10];
-        public int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
+        public static int[,] Grid { get; } = new int[23, 10];
+        public static int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
         private Stopwatch timer = new Stopwatch();
         private Stopwatch dropTimer = new Stopwatch();
         private readonly Stopwatch inputTimer = new Stopwatch();
         public int dropTime, dropRate;
         public static bool isDropped = false;
-        public Piece tetromino;
+        public static Piece tetromino;
         public Piece nextTetromino;
-        public bool isKeyPressed = false;
+        public static bool isKeyPressed = false;
         public int linesCleared = 0, score = 0, level = 1;
         public int combo = 0;
         private Input input = new Input();
@@ -26,7 +26,6 @@ namespace Tetris
         private readonly Difficulty difficulty = new Difficulty();
         private readonly MainMenu mainMenu = new MainMenu();
         private GameOver gameOver = new GameOver();
-        //public int i;
         private bool ThreadRunning = false;
 
         /// <summary>
@@ -65,11 +64,25 @@ namespace Tetris
         public void Update(int difficultyLevel)
         {
 
-            Thread thread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+            //Thread thread = new Thread(() => input.Readkey());
 
             // Gameloop
             while (true)
             {
+                Thread thread = new Thread(() => input.Readkey());
+                if (ThreadRunning == true)
+                {
+                    thread.Abort();
+                    ThreadRunning = false;
+                }
+                else
+                {
+                    thread.Start();
+                    ThreadRunning = true;
+                }
+
+
+                //thread.Suspend();
                 dropTime = (int)dropTimer.ElapsedMilliseconds;
                 if (dropTime > dropRate)
                 {
@@ -91,19 +104,22 @@ namespace Tetris
                         return;
                 }
                 
-                if (ThreadRunning == false)
+                /*if (ThreadRunning == false)
                 {
                     thread.Start();
                     ThreadRunning = true;
                 }
                 else
-                {
-                    thread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+                {                    
+                    thread = new Thread(() => input.Readkey());                    
                     ThreadRunning = false;
-                }
+                }*/
 
+                //thread = new Thread(() => input.Readkey());
+                //thread.Start();*/
+                //input.Readkey();
                 CheckLine(difficultyLevel);
-
+                //Thread.Sleep(1000);
             }
         }
 
