@@ -69,7 +69,7 @@ namespace Tetris
                     Environment.Exit(1);
                 }
                 Console.Clear();
-            }while (true);  
+            } while (true);  
             
         }
 
@@ -102,12 +102,12 @@ namespace Tetris
                         return;
                 }
                 
-                Thread inputThread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
+                //Thread inputThread = new Thread(() => input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid));
 
-                inputThread.Start();
+                //inputThread.Start();
 
                 // Without threads
-                //input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
+                input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
                 CheckLine();
             }
         }
