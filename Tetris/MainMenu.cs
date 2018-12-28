@@ -16,16 +16,14 @@ namespace Tetris
         public void Display()
         {
             Difficulty difficulty = new Difficulty();
+            Info info = new Info();
             Credits credits = new Credits();
             Highscores highscores = new Highscores();
-
-            //Credits credits = new Credits();
-
-            //HighScores highScores = new HighScores();
 
             List<string> menuLines = new List<string>() {
                 "   New Game     ",
                 "   High Scores  ",
+                "   Game Info    ",
                 "   Credits      ",
                 "   Quit         "
             };
@@ -48,6 +46,12 @@ namespace Tetris
                 {
                     Console.Clear();
                     highscores.Display();
+                    Console.Clear();
+                }
+                else if (selected == "   Game Info    ")
+                {
+                    Console.Clear();
+                    info.Display();
                     Console.Clear();
                 }
                 else if (selected == "   Credits      ")
@@ -107,9 +111,13 @@ namespace Tetris
             }
             if (selectedLine == 2)
             {
-                Console.WriteLine("Look at the credits");
+                Console.WriteLine("View game information");
             }
             if (selectedLine == 3)
+            {
+                Console.WriteLine("Look at the credits");
+            }
+            if (selectedLine == 4)
             {
                 Console.WriteLine("Quit the game");
             }

@@ -24,7 +24,8 @@ namespace Tetris
                 Console.WriteLine($"Name: {highscore.Item1,-40}" + $"Difficulty: {highscore.Item3, - 10}" + $"Score: {highscore.Item2}");
             }
 
-            Console.SetCursorPosition(48, 20);
+            Console.SetCursorPosition(48, 22);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Press any Key to continue...");
 
             Console.ReadKey();
