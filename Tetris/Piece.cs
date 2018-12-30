@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tetris
 {
@@ -96,8 +94,7 @@ namespace Tetris
                 {
                     DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1]] = 1;
                 }
-                Game.isDropped = true;
-
+                Game.IsDropped = true;
             }
             else
             {
@@ -227,25 +224,17 @@ namespace Tetris
         /// <returns></returns>
         public bool IsSomethingBelow(int[,] DroppedtetrominoeLocationGrid)
         {
-            try
+            for (int i = 0; i < 4; i++)
             {
-                for (int i = 0; i < 4; i++)
+                if (Location[i][0] + 1 >= 23)
+                    return true;
+                if (Location[i][0] + 1 < 23)
                 {
-                    if (Location[i][0] + 1 >= 23)
-                        return true;
-                    if (Location[i][0] + 1 < 23)
+                    if (DroppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
                     {
-                        if (DroppedtetrominoeLocationGrid[Location[i][0] + 1, Location[i][1]] == 1)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
-                return false;
-            }
-            catch
-            {
-
             }
             return false;
         }

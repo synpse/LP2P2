@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tetris
 {
     class GameOver
     {
-        HighscoresManager hsm = new HighscoresManager();
-        Difficulty difficulty = new Difficulty();
-        MainMenu mainMenu = new MainMenu();
+        private HighscoresManager hsm = new HighscoresManager();
+        private Difficulty difficulty = new Difficulty();
+        private MainMenu mainMenu = new MainMenu();
 
         public void Display(int score, int difficultyLevel)
         {

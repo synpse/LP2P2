@@ -4,7 +4,7 @@ namespace Tetris
 {
     class Highscores
     {
-        HighscoresManager hsm = new HighscoresManager();
+        private HighscoresManager hsm = new HighscoresManager();
 
         public void Display()
         {

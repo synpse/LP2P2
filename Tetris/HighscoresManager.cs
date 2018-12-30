@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Tetris
 {
-    public class HighscoresManager
+    class HighscoresManager
     {
         private List<Tuple<string, float, string>> highscores;
 

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tetris
 {
     /// <summary>
     /// Creates Tetronimo Class
     /// </summary>
-    public class Tetromino
+    class Tetromino
     {
+        private Render render = new Render();
+        private readonly Square square = new Square();
+
         public static int[,] I { get; } = new int[1, 4] { { 1, 1, 1, 1 } };
         public static int[,] O { get; } = new int[2, 2] { { 1, 1 }, { 1, 1 } };
         public static int[,] T { get; } = new int[2, 3] { { 0, 1, 0 }, { 1, 1, 1 } };
@@ -25,9 +25,6 @@ namespace Tetris
         public List<int[]> Location { get; set; }
 
         public static ConsoleColor CurrentColor { get; set; }
-
-        private Render render = new Render();
-        private readonly Square square = new Square();
 
         // Build a new random tetromino
         /// <summary>

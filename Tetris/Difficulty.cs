@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tetris
 {
     class Difficulty
     {
-        private int selectedLine = 0;
-        public int difficultyLevel;
+        private Game game = new Game();
+
+        private int SelectedLine { get; set; }
+        private int DifficultyLevel { get; set; }
 
         /// <summary>
         /// Method that adds functionality to the menu.
         /// </summary>
         public void Display()
         {
-            Game game = new Game();
+            SelectedLine = 0;
 
             // Collect garbage at the beggining of every game
             GC.Collect();
@@ -38,32 +37,32 @@ namespace Tetris
                 if (selected == "   Easy         ")
                 {
                     Console.Clear();
-                    difficultyLevel = 1;
-                    game.Start(difficultyLevel);
+                    DifficultyLevel = 1;
+                    game.Start(DifficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Medium       ")
                 {
                     Console.Clear();
-                    difficultyLevel = 2;
-                    game.Start(difficultyLevel);
+                    DifficultyLevel = 2;
+                    game.Start(DifficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Hard         ")
                 {
                     Console.Clear();
-                    difficultyLevel = 3;
-                    game.Start(difficultyLevel);
+                    DifficultyLevel = 3;
+                    game.Start(DifficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
                 else if (selected == "   Expert       ")
                 {
                     Console.Clear();
-                    difficultyLevel = 4;
-                    game.Start(difficultyLevel);
+                    DifficultyLevel = 4;
+                    game.Start(DifficultyLevel);
                     Console.Clear();
                     chosingMenu = false;
                 }
@@ -79,7 +78,7 @@ namespace Tetris
         {
             for (int i = 0; i < lines.Count; i++)
             {
-                if (i == selectedLine)
+                if (i == SelectedLine)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;
@@ -104,19 +103,19 @@ namespace Tetris
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(2, 23);
-            if (selectedLine == 0)
+            if (SelectedLine == 0)
             {
                 Console.WriteLine("Play the game on easy");
             }
-            if (selectedLine == 1)
+            if (SelectedLine == 1)
             {
                 Console.WriteLine("Play the game on medium");
             }
-            if (selectedLine == 2)
+            if (SelectedLine == 2)
             {
                 Console.WriteLine("Play the game on hard");
             }
-            if (selectedLine == 3)
+            if (SelectedLine == 3)
             {
                 Console.WriteLine("Play the game on expert");
             }
@@ -129,27 +128,27 @@ namespace Tetris
 
             if (input.Key == ConsoleKey.DownArrow)
             {
-                if (selectedLine == lines.Count - 1)
+                if (SelectedLine == lines.Count - 1)
                 {
                 }
                 else
                 {
-                    selectedLine++;
+                    SelectedLine++;
                 }
             }
             else if (input.Key == ConsoleKey.UpArrow)
             {
-                if (selectedLine <= 0)
+                if (SelectedLine <= 0)
                 {
                 }
                 else
                 {
-                    selectedLine--;
+                    SelectedLine--;
                 }
             }
             else if (input.Key == ConsoleKey.Enter || input.Key == ConsoleKey.Spacebar)
             {
-                return lines[selectedLine];
+                return lines[SelectedLine];
             }
             else
             {

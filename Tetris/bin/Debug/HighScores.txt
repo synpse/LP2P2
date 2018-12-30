@@ -1,4 +1,7 @@
 Name:Score
+Big Shaq:17340:1
 Recursividade de Recursos:12260:1
+Big kek:4380:1
 Array de Apontadores Para Recurso:1420:2
+Master of Recursos:280:4
 Recurso:260:3

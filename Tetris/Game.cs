@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace Tetris
 {
@@ -9,53 +8,64 @@ namespace Tetris
     /// </summary>
     class Game
     {
-        public static int[,] Grid { get; } = new int[23, 10];
-        public static int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
-        private Stopwatch timer = new Stopwatch();
-        private Stopwatch dropTimer = new Stopwatch();
-        private readonly Stopwatch inputTimer = new Stopwatch();
-        public int dropTime, dropRate;
-        public static bool isDropped = false;
-        public static Piece tetromino;
-        public Piece nextTetromino;
-        public static bool isKeyPressed = false;
-        public int linesCleared = 0, score = 0, level = 1;
-        public int combo = 0;
         private Input input = new Input();
         private Render render = new Render();
         private readonly Difficulty difficulty = new Difficulty();
         private readonly MainMenu mainMenu = new MainMenu();
-        private GameOver gameOver = new GameOver();
-        private bool ThreadRunning = false;
+        private readonly GameOver gameOver = new GameOver();
+        private Stopwatch timer = new Stopwatch();
+        private Stopwatch dropTimer = new Stopwatch();
+        private readonly Stopwatch inputTimer = new Stopwatch();
+        private Piece tetromino;
+        private Piece nextTetromino;
+
+        private int[,] Grid { get; } = new int[23, 10];
+        private int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
+        private int DropTime { get; set; }
+        private int DropRate { get; set; }
+        private bool IsKeyPressed { get; set; }
+        private int LinesCleared { get; set; }
+        private int Score { get; set; }
+        private int Level { get; set; }
+        private int Combo { get; set; }
+
+        public static bool IsDropped { get; set; }
 
         /// <summary>
         /// Creates method Start
         /// </summary>
         public void Start(int difficultyLevel)
         {
-            
+            IsDropped = false;
+            IsKeyPressed = false;
+            LinesCleared = 0;
+            Score = 0;
+            Level = 0;
+            Combo = 0;
+
             render.DrawBorder();
-            Console.SetCursorPosition(4, 5);
-            Console.WriteLine("Press any key");
-            Console.ReadKey(true);
 
             timer.Start();
             dropTimer.Start();
+            // Time passed measured by the instance
             long time = timer.ElapsedMilliseconds;
 
             // Update score and level
-            render.DrawScoreAndLevel(level, score, linesCleared, combo);
+            render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
 
             nextTetromino = new Piece();
             tetromino = nextTetromino;
             tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
             nextTetromino = new Piece();
-            
+
+            //Thread thread = new Thread(() => input.Readkey(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
+            //thread.Start();
+
             Update(difficultyLevel);
 
             Console.Clear();
 
-            gameOver.Display(score, difficultyLevel);
+            gameOver.Display(Score, difficultyLevel);
         }
 
         /// <summary>
@@ -63,71 +73,36 @@ namespace Tetris
         /// </summary>
         public void Update(int difficultyLevel)
         {
-
-            //Thread thread = new Thread(() => input.Readkey());
-
             // Gameloop
             while (true)
             {
-                Thread thread = new Thread(() => input.Readkey());
-                if (ThreadRunning == true)
-                {
-                    thread.Abort();
-                    ThreadRunning = false;
-                }
-                else
-                {
-                    thread.Start();
-                    ThreadRunning = true;
-                }
+                // Save elapsed time as an int
+                DropTime = (int)dropTimer.ElapsedMilliseconds;
 
+                input.Readkey(Grid, DroppedtetrominoeLocationGrid, tetromino, IsKeyPressed);
 
-                //thread.Suspend();
-                dropTime = (int)dropTimer.ElapsedMilliseconds;
-                if (dropTime > dropRate)
+                if (DropTime > DropRate)
                 {
-                    dropTime = 0;
+                    DropTime = 0;
                     dropTimer.Restart();
                     tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
                 }
-                if (isDropped == true)
+                if (IsDropped == true)
                 {
                     tetromino = nextTetromino;
                     nextTetromino = new Piece();
                     tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
 
-                    isDropped = false;
-                }               
+                    IsDropped = false;
+                }
                 for (int j = 0; j < 10; j++)
                 {
                     if (DroppedtetrominoeLocationGrid[0, j] == 1)
                         return;
                 }
-                
-                /*if (ThreadRunning == false)
-                {
-                    thread.Start();
-                    ThreadRunning = true;
-                }
-                else
-                {                    
-                    thread = new Thread(() => input.Readkey());                    
-                    ThreadRunning = false;
-                }*/
-
-                //thread = new Thread(() => input.Readkey());
-                //thread.Start();*/
-                //input.Readkey();
                 CheckLine(difficultyLevel);
-                //Thread.Sleep(1000);
             }
         }
-
-
-        /*public void TestCancer()
-        {            
-            input.Readkey(isKeyPressed, tetromino, Grid, DroppedtetrominoeLocationGrid);
-        }*/
         
         /// <summary>
         /// Creates CheckLine Method
@@ -141,44 +116,44 @@ namespace Tetris
                 {
                     if (DroppedtetrominoeLocationGrid[i, j] == 0)
                     {
-                        combo = 0;
+                        Combo = 0;
                         break;
                     }
                 }
                 if (j == 10)
                 {
-                    combo++;
-                    linesCleared++;
+                    Combo++;
+                    LinesCleared++;
 
-                    if (combo == 1)
-                        score += 40 * level;
-                    else if (combo == 2)
-                        score += 100 * level;
-                    else if (combo == 3)
-                        score += 300 * level;
-                    else if (combo > 3)
-                        score += 300 * combo * level;
+                    if (Combo == 1)
+                        Score += 40 * Level;
+                    else if (Combo == 2)
+                        Score += 100 * Level;
+                    else if (Combo == 3)
+                        Score += 300 * Level;
+                    else if (Combo > 3)
+                        Score += 300 * Combo * Level;
 
-                    ClearLine(combo, i, j);
+                    ClearLine(Combo, i, j);
 
                     // Update score and level
-                    render.DrawScoreAndLevel(level, score, linesCleared, combo);
+                    render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
                 }
             }
 
-            if (linesCleared < 5) level = 1;
-            else if (linesCleared < 10) level = 2;
-            else if (linesCleared < 15) level = 3;
-            else if (linesCleared < 25) level = 4;
-            else if (linesCleared < 35) level = 5;
-            else if (linesCleared < 50) level = 6;
-            else if (linesCleared < 70) level = 7;
-            else if (linesCleared < 90) level = 8;
-            else if (linesCleared < 110) level = 9;
-            else if (linesCleared < 150) level = 10;
+            if (LinesCleared < 5) Level = 1;
+            else if (LinesCleared < 10) Level = 2;
+            else if (LinesCleared < 15) Level = 3;
+            else if (LinesCleared < 25) Level = 4;
+            else if (LinesCleared < 35) Level = 5;
+            else if (LinesCleared < 50) Level = 6;
+            else if (LinesCleared < 70) Level = 7;
+            else if (LinesCleared < 90) Level = 8;
+            else if (LinesCleared < 110) Level = 9;
+            else if (LinesCleared < 150) Level = 10;
 
             // Increase the drop rate with level
-            dropRate = (400 / difficultyLevel) - 22 * level;
+            DropRate = (400 / difficultyLevel) - 22 * Level;
         }
 
         /// <summary>
