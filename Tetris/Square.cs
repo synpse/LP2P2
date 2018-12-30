@@ -5,7 +5,7 @@
     /// </summary>
     class Square
     {
-        public string Sqr { get; set; }
+        public string Sqr { get; }
 
         /// <summary>
         /// Creates Square Constructor

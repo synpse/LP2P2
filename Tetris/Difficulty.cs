@@ -5,16 +5,16 @@ namespace Tetris
 {
     class Difficulty
     {
-        private Game game = new Game();
-
         private int SelectedLine { get; set; }
-        private int DifficultyLevel { get; set; }
+        public int DifficultyLevel { get; set; }
 
         /// <summary>
         /// Method that adds functionality to the menu.
         /// </summary>
         public void Display()
         {
+            Game game = new Game();
+
             SelectedLine = 0;
 
             // Collect garbage at the beggining of every game
