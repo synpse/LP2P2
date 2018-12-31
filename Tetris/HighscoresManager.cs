@@ -67,7 +67,8 @@ namespace Tetris
         public void AddScore(string name, float score, string difficulty)
         {
             ///Cria e instância um novo objecto que guarda a nova pontuação.
-            Tuple<string, float, string> newScore = new Tuple<string, float, string>(name, score, difficulty);
+            Tuple<string, float, string> newScore = new Tuple<string, float, string>
+                (name, score, difficulty);
 
             /// Adiciona o nova melhor pontuação a lista.
             highscores.Add(newScore);

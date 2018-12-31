@@ -58,7 +58,8 @@ namespace Tetris
             tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
             nextTetromino = new Piece();
 
-            //Thread thread = new Thread(() => input.Readkey(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
+            //Thread thread = new Thread(() => input.Readkey
+            //(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
             //thread.Start();
 
             Update(difficultyLevel, dropTimer, tetromino, nextTetromino, input, render);
@@ -71,7 +72,8 @@ namespace Tetris
         /// <summary>
         /// Creates GameLoop
         /// </summary>
-        public void Update(int difficultyLevel, Stopwatch dropTimer, Piece tetromino, Piece nextTetromino, Input input, Render render)
+        public void Update(int difficultyLevel, Stopwatch dropTimer, 
+            Piece tetromino, Piece nextTetromino, Input input, Render render)
         {
             // Gameloop
             while (true)
@@ -175,7 +177,8 @@ namespace Tetris
             {
                 for (int l = 0; l < 10; l++)
                 {
-                    newdroppedtetrominoeLocationGrid[k + 1, l] = DroppedtetrominoeLocationGrid[k, l];
+                    newdroppedtetrominoeLocationGrid[k + 1, l] = 
+                        DroppedtetrominoeLocationGrid[k, l];
                 }
             }
 

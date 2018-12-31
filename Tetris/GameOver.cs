@@ -4,12 +4,10 @@ namespace Tetris
 {
     class GameOver
     {
-        private HighscoresManager hsm = new HighscoresManager();
-        private Difficulty difficulty = new Difficulty();
-        private MainMenu mainMenu = new MainMenu();
-
         public void Display(int score, int difficultyLevel)
         {
+            HighscoresManager hsm = new HighscoresManager();
+
             bool saving = true;
             while(saving)
             {
@@ -41,18 +39,8 @@ namespace Tetris
                     Console.ResetColor();
                     Console.SetCursorPosition(36, 4);
                     Console.Write($"Your score was saved! Do you want to retry? (Y/N)");
-                    ConsoleKeyInfo input2 = Console.ReadKey();
-
-                    if (input2.Key == ConsoleKey.Y)
-                    {
-                        difficulty.Display();
-                        saving = false;
-                    }
-                    else if (input2.Key == ConsoleKey.N)
-                    {
-                        mainMenu.Display();
-                        saving = false;
-                    }
+                    Retry();
+                    saving = false;
                 }
                 else if (input.Key == ConsoleKey.N)
                 {
@@ -63,18 +51,31 @@ namespace Tetris
                     Console.ResetColor();
                     Console.SetCursorPosition(48, 4);
                     Console.Write($"Do you want to retry? (Y/N)");
-                    ConsoleKeyInfo input2 = Console.ReadKey();
+                    Retry();
+                    saving = false;
+                }
+            }
+        }
 
-                    if (input2.Key == ConsoleKey.Y)
-                    {
-                        difficulty.Display();
-                        saving = false;
-                    }
-                    else if (input2.Key == ConsoleKey.N)
-                    {
-                        mainMenu.Display();
-                        saving = false;
-                    }
+        public void Retry()
+        {
+            Difficulty difficulty = new Difficulty();
+            MainMenu mainMenu = new MainMenu();
+
+            bool retrying = true;
+            while(retrying)
+            {
+                ConsoleKeyInfo input = Console.ReadKey();
+
+                if (input.Key == ConsoleKey.Y)
+                {
+                    difficulty.Display();
+                    retrying = false;
+                }
+                else if (input.Key == ConsoleKey.N)
+                {
+                    mainMenu.Display();
+                    retrying = false;
                 }
             }
         }

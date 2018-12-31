@@ -11,8 +11,6 @@ namespace Tetris
     /// </summary>
     class Render
     {
-        private Square square = new Square();
-
         /// <summary>
         /// Creates Draw Method
         /// </summary>
@@ -24,6 +22,8 @@ namespace Tetris
             {
                 for (int j = 0; j < 10; j++)
                 {
+                    Square square = new Square();
+
                     Console.SetCursorPosition(1 + 2 * j, i);
                     if (grid[i, j] == 1 | droppedtetrominoeLocationGrid[i, j] == 1)
                     {
@@ -82,6 +82,8 @@ namespace Tetris
         /// <param name="Shape"></param>
         public void DrawNewTetromino(int[,] Shape)
         {
+            Square square = new Square();
+
             for (int i = 0; i < Shape.GetLength(0); i++)
             {
                 for (int j = 0; j < Shape.GetLength(1); j++)

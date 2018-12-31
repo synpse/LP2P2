@@ -9,8 +9,6 @@ namespace Tetris
     /// </summary>
     class Piece : Tetromino
     {
-        private Render render = new Render();
-
         /// <summary>
         /// Creates PositionUpdate Metod
         /// </summary>
@@ -18,6 +16,8 @@ namespace Tetris
         /// <param name="DroppedtetrominoeLocationGrid"></param>
         public void PositionUpdate(int[,] Grid, int[,] DroppedtetrominoeLocationGrid)
         {
+            Render render = new Render();
+
             for (int i = 0; i < 23; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -126,18 +126,20 @@ namespace Tetris
 
             if (Shape == Tetrominoes[0])
             {
-                if (IsErect == false)
+                if (Vertical == false)
                 {
                     for (int i = 0; i < Location.Count; i++)
                     {
-                        templocation[i] = TransformMatrix(Location[i], Location[2], "Clockwise");
+                        templocation[i] = TransformMatrix
+                            (Location[i], Location[2], "Clockwise");
                     }
                 }
                 else
                 {
                     for (int i = 0; i < Location.Count; i++)
                     {
-                        templocation[i] = TransformMatrix(Location[i], Location[2], "Counterclockwise");
+                        templocation[i] = TransformMatrix
+                            (Location[i], Location[2], "Counterclockwise");
                     }
                 }
             }
@@ -146,7 +148,8 @@ namespace Tetris
             {
                 for (int i = 0; i < Location.Count; i++)
                 {
-                    templocation[i] = TransformMatrix(Location[i], Location[3], "Clockwise");
+                    templocation[i] = TransformMatrix
+                        (Location[i], Location[3], "Clockwise");
                 }
             }
 
@@ -160,7 +163,8 @@ namespace Tetris
             }
 
 
-            for (int count = 0; IsOverlayLeft(templocation, DroppedtetrominoeLocationGrid) != false 
+            for (int count = 0; IsOverlayLeft
+                (templocation, DroppedtetrominoeLocationGrid) != false 
                 | IsOverlayRight(templocation, DroppedtetrominoeLocationGrid) != false 
                 | IsOverlayBelow(templocation, DroppedtetrominoeLocationGrid) != false; count++)
             {
@@ -245,7 +249,8 @@ namespace Tetris
         /// <param name="location"></param>
         /// <param name="DroppedtetrominoeLocationGrid"></param>
         /// <returns></returns>
-        public bool ? IsOverlayBelow(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
+        public bool ? IsOverlayBelow(List<int[]> location, int[,] DroppedtetrominoeLocationGrid)
+            //Nullable<bool>
         {
             List<int> ycoords = new List<int>();
             for (int i = 0; i < 4; i++)
@@ -308,11 +313,13 @@ namespace Tetris
                     {
                         return true;
                     }
-                    else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
+                    else if (DroppedtetrominoeLocationGrid
+                        [Location[i][0], Location[i][1] - 1] == 1)
                     {
                         return true;
                     }
-                    if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] - 1] == 1)
+                    if (DroppedtetrominoeLocationGrid
+                        [Location[i][0], Location[i][1] - 1] == 1)
                     {
                         return true;
                     }
@@ -335,7 +342,8 @@ namespace Tetris
         /// <param name="location"></param>
         /// <param name="DroppedtetrominoeLocationGrid"></param>
         /// <returns></returns>
-        public bool ? IsOverlayLeft(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
+        public bool ? IsOverlayLeft(List<int[]> location, int[,] DroppedtetrominoeLocationGrid)
+            //Nullable<bool>
         {
             List<int> xcoords = new List<int>();
             for (int i = 0; i < 4; i++)
@@ -396,7 +404,8 @@ namespace Tetris
                     {
                         return true;
                     }
-                    else if (DroppedtetrominoeLocationGrid[Location[i][0], Location[i][1] + 1] == 1)
+                    else if (DroppedtetrominoeLocationGrid
+                        [Location[i][0], Location[i][1] + 1] == 1)
                     {
                         return true;
                     }
@@ -418,7 +427,9 @@ namespace Tetris
         /// <param name="location"></param>
         /// <param name="DroppedtetrominoeLocationGrid"></param>
         /// <returns></returns>
-        public bool ? IsOverlayRight(List<int[]> location, int[,] DroppedtetrominoeLocationGrid) //Nullable<bool>
+        public bool ? IsOverlayRight(List<int[]> location, 
+            int[,] DroppedtetrominoeLocationGrid) 
+            //Nullable<bool>
         {
             List<int> xcoords = new List<int>();
             for (int i = 0; i < 4; i++)

@@ -16,7 +16,8 @@ namespace Tetris
         /// <param name="tetromino"></param>
         /// <param name="Grid"></param>
         /// <param name="DroppedtetrominoeLocationGrid"></param>
-        public void Readkey(int[,] Grid, int[,] DroppedtetrominoeLocationGrid, Piece tetromino, bool isKeyPressed)
+        public void Readkey(int[,] Grid, int[,] DroppedtetrominoeLocationGrid, 
+            Piece tetromino, bool isKeyPressed)
         {
             if (Console.KeyAvailable)
             {
@@ -24,9 +25,12 @@ namespace Tetris
                 isKeyPressed = true;
             }
             else
+            {
                 isKeyPressed = false;
+            }
 
-            if (Key.Key == ConsoleKey.LeftArrow && !tetromino.IsSomethingLeft(DroppedtetrominoeLocationGrid) && isKeyPressed)
+            if (Key.Key == ConsoleKey.LeftArrow && !tetromino.IsSomethingLeft
+                (DroppedtetrominoeLocationGrid) && isKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -34,7 +38,8 @@ namespace Tetris
                 }
                 tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
-            else if (Key.Key == ConsoleKey.RightArrow && !tetromino.IsSomethingRight(DroppedtetrominoeLocationGrid) && isKeyPressed)
+            else if (Key.Key == ConsoleKey.RightArrow && !tetromino.IsSomethingRight
+                (DroppedtetrominoeLocationGrid) && isKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {

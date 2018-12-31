@@ -4,10 +4,10 @@ namespace Tetris
 {
     class Highscores
     {
-        private HighscoresManager hsm = new HighscoresManager();
-
         public void Display()
         {
+            HighscoresManager hsm = new HighscoresManager();
+
             Console.Clear();
             Console.SetCursorPosition(55, 2);
             Console.ForegroundColor = ConsoleColor.White;
@@ -21,7 +21,8 @@ namespace Tetris
             {
                 row++;
                 Console.SetCursorPosition(20, row);
-                Console.WriteLine($"Name: {highscore.Item1,-40}" + $"Difficulty: {highscore.Item3, - 10}" + $"Score: {highscore.Item2}");
+                Console.WriteLine($"Name: {highscore.Item1,-40}" + $"Difficulty: " +
+                    $"{highscore.Item3, - 10}" + $"Score: {highscore.Item2}");
             }
 
             Console.SetCursorPosition(48, 22);

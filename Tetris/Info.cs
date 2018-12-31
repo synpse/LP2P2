@@ -14,7 +14,8 @@ namespace Tetris
             Console.SetCursorPosition(46, 4);
             Console.WriteLine("This project is a Tetris clone.");
             Console.SetCursorPosition(8, 6);
-            Console.WriteLine("The original idea for this game belongs to Alexey Pajitnov of the Academy of Science of the Soviet Union.");
+            Console.WriteLine("The original idea for this game belongs to " +
+                "Alexey Pajitnov of the Academy of Science of the Soviet Union.");
             Console.SetCursorPosition(58, 8);
             Console.WriteLine("*blyat*");
             Console.SetCursorPosition(54, 10);

@@ -8,9 +8,6 @@ namespace Tetris
     /// </summary>
     class Tetromino
     {
-        private Render render = new Render();
-        private readonly Square square = new Square();
-
         public static int[,] I { get; } = new int[1, 4] { { 1, 1, 1, 1 } };
         public static int[,] O { get; } = new int[2, 2] { { 1, 1 }, { 1, 1 } };
         public static int[,] T { get; } = new int[2, 3] { { 0, 1, 0 }, { 1, 1, 1 } };
@@ -18,9 +15,11 @@ namespace Tetris
         public static int[,] Z { get; } = new int[2, 3] { { 1, 1, 0 }, { 0, 1, 1 } };
         public static int[,] J { get; } = new int[2, 3] { { 1, 0, 0 }, { 1, 1, 1 } };
         public static int[,] L { get; } = new int[2, 3] { { 0, 0, 1 }, { 1, 1, 1 } };
-        public static List<int[,]> Tetrominoes { get; } = new List<int[,]>() { I, O, T, S, Z, J, L };
 
-        public bool IsErect { get; set; }
+        public static List<int[,]> Tetrominoes { get; } = 
+            new List<int[,]>() { I, O, T, S, Z, J, L };
+
+        public bool Vertical { get; set; }
         public int[,] Shape { get; set; }
         public List<int[]> Location { get; set; }
 
@@ -32,12 +31,13 @@ namespace Tetris
         /// </summary>
         public Tetromino()
         {
-            // New random
-            Random rand = new Random();
+            Render render = new Render();
+            Square square = new Square();
+            Random rand = new Random(); // New random
             int random = rand.Next(0, 7);
 
             // Default values
-            IsErect = false;
+            Vertical = false;
             Location = new List<int[]>();
 
             // Make a random new tetromino
