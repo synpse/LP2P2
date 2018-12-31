@@ -14,17 +14,16 @@ namespace Tetris
         public void Display()
         {
             Game game = new Game();
+            MainMenu mainMenu = new MainMenu();
 
             SelectedLine = 0;
-
-            // Collect garbage at the beggining of every game
-            GC.Collect();
 
             List<string> menuLines = new List<string>() {
                 "   Easy         ",
                 "   Medium       ",
                 "   Hard         ",
-                "   Expert       "
+                "   Expert       ",
+                "   Back         "
             };
 
             bool chosingMenu = true;
@@ -63,6 +62,13 @@ namespace Tetris
                     Console.Clear();
                     DifficultyLevel = 4;
                     game.Start(DifficultyLevel);
+                    Console.Clear();
+                    chosingMenu = false;
+                }
+                else if (selected == "   Back         ")
+                {
+                    Console.Clear();
+                    mainMenu.Display();
                     Console.Clear();
                     chosingMenu = false;
                 }
@@ -128,22 +134,18 @@ namespace Tetris
 
             if (input.Key == ConsoleKey.DownArrow)
             {
-                if (SelectedLine == lines.Count - 1)
+                SelectedLine++;
+                if (SelectedLine > 4)
                 {
-                }
-                else
-                {
-                    SelectedLine++;
+                    SelectedLine = 0;
                 }
             }
             else if (input.Key == ConsoleKey.UpArrow)
             {
-                if (SelectedLine <= 0)
+                SelectedLine--;
+                if (SelectedLine < 0)
                 {
-                }
-                else
-                {
-                    SelectedLine--;
+                    SelectedLine = 4;
                 }
             }
             else if (input.Key == ConsoleKey.Enter || input.Key == ConsoleKey.Spacebar)

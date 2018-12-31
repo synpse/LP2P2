@@ -8,17 +8,6 @@ namespace Tetris
     /// </summary>
     class Game
     {
-        private Input input = new Input();
-        private Render render = new Render();
-        private readonly Difficulty difficulty = new Difficulty();
-        private readonly MainMenu mainMenu = new MainMenu();
-        private readonly GameOver gameOver = new GameOver();
-        private Stopwatch timer = new Stopwatch();
-        private Stopwatch dropTimer = new Stopwatch();
-        private readonly Stopwatch inputTimer = new Stopwatch();
-        private Piece tetromino;
-        private Piece nextTetromino;
-
         private int[,] Grid { get; } = new int[23, 10];
         private int[,] DroppedtetrominoeLocationGrid { get; } = new int[23, 10];
         private int DropTime { get; set; }
@@ -36,6 +25,17 @@ namespace Tetris
         /// </summary>
         public void Start(int difficultyLevel)
         {
+            Input input = new Input();
+            Render render = new Render();
+            Difficulty difficulty = new Difficulty();
+            MainMenu mainMenu = new MainMenu();
+            GameOver gameOver = new GameOver();
+            Stopwatch timer = new Stopwatch();
+            Stopwatch dropTimer = new Stopwatch();
+            Stopwatch inputTimer = new Stopwatch();
+            Piece tetromino;
+            Piece nextTetromino;
+
             IsDropped = false;
             IsKeyPressed = false;
             LinesCleared = 0;
@@ -61,7 +61,7 @@ namespace Tetris
             //Thread thread = new Thread(() => input.Readkey(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
             //thread.Start();
 
-            Update(difficultyLevel);
+            Update(difficultyLevel, dropTimer, tetromino, nextTetromino, input, render);
 
             Console.Clear();
 
@@ -71,7 +71,7 @@ namespace Tetris
         /// <summary>
         /// Creates GameLoop
         /// </summary>
-        public void Update(int difficultyLevel)
+        public void Update(int difficultyLevel, Stopwatch dropTimer, Piece tetromino, Piece nextTetromino, Input input, Render render)
         {
             // Gameloop
             while (true)
@@ -100,14 +100,14 @@ namespace Tetris
                     if (DroppedtetrominoeLocationGrid[0, j] == 1)
                         return;
                 }
-                CheckLine(difficultyLevel);
+                CheckLine(difficultyLevel, render);
             }
         }
         
         /// <summary>
         /// Creates CheckLine Method
         /// </summary>
-        public void CheckLine(int difficultyLevel)
+        public void CheckLine(int difficultyLevel, Render render)
         {
             for (int i = 0; i < 23; i++)
             {
@@ -134,7 +134,7 @@ namespace Tetris
                     else if (Combo > 3)
                         Score += 300 * Combo * Level;
 
-                    ClearLine(Combo, i, j);
+                    ClearLine(Combo, i, j, render);
 
                     // Update score and level
                     render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
@@ -162,7 +162,7 @@ namespace Tetris
         /// <param name="combo"></param>
         /// <param name="i"></param>
         /// <param name="j"></param>
-        public void ClearLine(int combo, int i, int j)
+        public void ClearLine(int combo, int i, int j, Render render)
         {
             for (j = 0; j < 10; j++)
             {

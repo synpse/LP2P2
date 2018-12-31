@@ -40,3 +40,10 @@ C:\Users\Diogo Maia\Desktop\IssaTetris\LP2P2\Tetris\obj\Debug\Tetris.csprojResol
 C:\Users\Diogo Maia\Desktop\IssaTetris\LP2P2\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
 C:\Users\Diogo Maia\Desktop\IssaTetris\LP2P2\Tetris\obj\Debug\Tetris.exe
 C:\Users\Diogo Maia\Desktop\IssaTetris\LP2P2\Tetris\obj\Debug\Tetris.pdb
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\bin\Debug\Tetris.exe
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\bin\Debug\Tetris.pdb
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\obj\Debug\Tetris.exe
+C:\Users\Tiago Alves\Desktop\LP2P2\Tetris\obj\Debug\Tetris.pdb

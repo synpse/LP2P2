@@ -10,61 +10,71 @@ namespace Tetris
 
         public void Display(int score, int difficultyLevel)
         {
-            Console.Clear();
-            Console.SetCursorPosition(55, 2);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(" [Game Over]");
-            Console.ResetColor();
-            Console.SetCursorPosition(36, 4);
-            Console.Write($"Your score was {score}. Do you want to save it? (Y/N): ");
-            string input = Console.ReadLine().ToLower();
-
-            if (input == "y")
+            bool saving = true;
+            while(saving)
             {
-                Console.SetCursorPosition(48, 6);
-                Console.Write("Insert your name here: ");
-                string name = Console.ReadLine();
-                // Add score and name
-                hsm.AddScore(name, score, difficultyLevel.ToString());
-                // Save to file
-                hsm.Save();
-
                 Console.Clear();
                 Console.SetCursorPosition(55, 2);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(" [Game Over]");
                 Console.ResetColor();
                 Console.SetCursorPosition(36, 4);
-                Console.Write($"Your score was saved! Do you want to retry? (Y/N): ");
-                string input2 = Console.ReadLine().ToLower();
+                Console.Write($"Your score was {score}. Do you want to save it? (Y/N)");
+                ConsoleKeyInfo input = Console.ReadKey();
 
-                if (input2 == "y")
+                if (input.Key == ConsoleKey.Y)
                 {
-                    difficulty.Display();
-                }
-                else
-                {
-                    mainMenu.Display();
-                }
-            }
-            else
-            {
-                Console.Clear();
-                Console.SetCursorPosition(55, 2);
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(" [Game Over]");
-                Console.ResetColor();
-                Console.SetCursorPosition(48, 4);
-                Console.Write($"Do you want to retry? (Y/N): ");
-                string input2 = Console.ReadLine().ToLower();
+                    Console.SetCursorPosition(48, 22);
+                    Console.WriteLine("Press ENTER when done...");
+                    Console.SetCursorPosition(48, 6);
+                    Console.Write("Insert your name here: ");
+                    string name = Console.ReadLine();
+                    // Add score and name
+                    hsm.AddScore(name, score, difficultyLevel.ToString());
+                    // Save to file
+                    hsm.Save();
 
-                if (input2 == "y")
-                {
-                    difficulty.Display();
+                    Console.Clear();
+                    Console.SetCursorPosition(55, 2);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(" [Game Over]");
+                    Console.ResetColor();
+                    Console.SetCursorPosition(36, 4);
+                    Console.Write($"Your score was saved! Do you want to retry? (Y/N)");
+                    ConsoleKeyInfo input2 = Console.ReadKey();
+
+                    if (input2.Key == ConsoleKey.Y)
+                    {
+                        difficulty.Display();
+                        saving = false;
+                    }
+                    else if (input2.Key == ConsoleKey.N)
+                    {
+                        mainMenu.Display();
+                        saving = false;
+                    }
                 }
-                else
+                else if (input.Key == ConsoleKey.N)
                 {
-                    mainMenu.Display();
+                    Console.Clear();
+                    Console.SetCursorPosition(55, 2);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(" [Game Over]");
+                    Console.ResetColor();
+                    Console.SetCursorPosition(48, 4);
+                    Console.Write($"Do you want to retry? (Y/N)");
+                    ConsoleKeyInfo input2 = Console.ReadKey();
+
+                    if (input2.Key == ConsoleKey.Y)
+                    {
+                        difficulty.Display();
+                        saving = false;
+                    }
+                    else if (input2.Key == ConsoleKey.N)
+                    {
+                        mainMenu.Display();
+                        saving = false;
+                    }
                 }
             }
         }

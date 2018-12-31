@@ -15,8 +15,12 @@ namespace Tetris
             Console.WriteLine("This project is a Tetris clone.");
             Console.SetCursorPosition(8, 6);
             Console.WriteLine("The original idea for this game belongs to Alexey Pajitnov of the Academy of Science of the Soviet Union.");
+            Console.SetCursorPosition(58, 8);
+            Console.WriteLine("*blyat*");
             Console.SetCursorPosition(54, 10);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("[Game Controls]");
+            Console.ResetColor();
             Console.SetCursorPosition(43, 12);
             Console.WriteLine("LEFT ARROW to move tetromino to left;");
             Console.SetCursorPosition(42, 13);

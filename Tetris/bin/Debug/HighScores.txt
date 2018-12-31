@@ -5,3 +5,7 @@ Big kek:4380:1
 Array de Apontadores Para Recurso:1420:2
 Master of Recursos:280:4
 Recurso:260:3
+:0:1
+Try:0:1
+Try again:0:4
+fdfsdfsfdsf:0:4

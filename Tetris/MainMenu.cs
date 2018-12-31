@@ -5,11 +5,6 @@ namespace Tetris
 {
     class MainMenu
     {
-        private Difficulty difficulty = new Difficulty();
-        private Info info = new Info();
-        private Credits credits = new Credits();
-        private Highscores highscores = new Highscores();
-
         private int SelectedLine { get; set; }
 
         /// <summary>
@@ -17,6 +12,11 @@ namespace Tetris
         /// </summary>
         public void Display()
         {
+            Difficulty difficulty = new Difficulty();
+            Info info = new Info();
+            Credits credits = new Credits();
+            Highscores highscores = new Highscores();
+
             SelectedLine = 0;
 
             List<string> menuLines = new List<string>() {
@@ -129,22 +129,18 @@ namespace Tetris
 
             if (input.Key == ConsoleKey.DownArrow)
             {
-                if (SelectedLine == lines.Count - 1)
+                SelectedLine++;
+                if (SelectedLine > 4)
                 {
-                }
-                else
-                {
-                    SelectedLine++;
+                    SelectedLine = 0;
                 }
             }
             else if (input.Key == ConsoleKey.UpArrow)
             {
-                if (SelectedLine <= 0)
+                SelectedLine--;
+                if (SelectedLine < 0)
                 {
-                }
-                else
-                {
-                    SelectedLine--;
+                    SelectedLine = 4;
                 }
             }
             else if (input.Key == ConsoleKey.Enter || input.Key == ConsoleKey.Spacebar)
