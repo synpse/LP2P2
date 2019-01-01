@@ -33,8 +33,8 @@ namespace Tetris
             Stopwatch timer = new Stopwatch();
             Stopwatch dropTimer = new Stopwatch();
             Stopwatch inputTimer = new Stopwatch();
-            Piece tetromino;
-            Piece nextTetromino;
+            Piece piece;
+            Piece newPiece;
 
             IsDropped = false;
             IsKeyPressed = false;
@@ -43,26 +43,21 @@ namespace Tetris
             Level = 0;
             Combo = 0;
 
-            render.DrawBorder();
-
             timer.Start();
             dropTimer.Start();
             // Time passed measured by the instance
             long time = timer.ElapsedMilliseconds;
 
-            // Update score and level
-            render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
-
-            nextTetromino = new Piece();
-            tetromino = nextTetromino;
-            tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
-            nextTetromino = new Piece();
+            newPiece = new Piece();
+            piece = newPiece;
+            piece.Spawn(Grid, DroppedtetrominoeLocationGrid);
+            newPiece = new Piece();
 
             //Thread thread = new Thread(() => input.Readkey
             //(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
             //thread.Start();
 
-            Update(difficultyLevel, dropTimer, tetromino, nextTetromino, input, render);
+            Update(difficultyLevel, dropTimer, piece, newPiece, input, render);
 
             Console.Clear();
 
@@ -73,7 +68,7 @@ namespace Tetris
         /// Creates GameLoop
         /// </summary>
         public void Update(int difficultyLevel, Stopwatch dropTimer, 
-            Piece tetromino, Piece nextTetromino, Input input, Render render)
+            Piece piece, Piece newPiece, Input input, Render render)
         {
             // Gameloop
             while (true)
@@ -81,19 +76,21 @@ namespace Tetris
                 // Save elapsed time as an int
                 DropTime = (int)dropTimer.ElapsedMilliseconds;
 
-                input.Readkey(Grid, DroppedtetrominoeLocationGrid, tetromino, IsKeyPressed);
+                // Check for new input
+                input.Readkey(Grid, DroppedtetrominoeLocationGrid, piece, IsKeyPressed);
 
+                // Update the game
                 if (DropTime > DropRate)
                 {
                     DropTime = 0;
                     dropTimer.Restart();
-                    tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
+                    piece.Drop(Grid, DroppedtetrominoeLocationGrid);
                 }
                 if (IsDropped == true)
                 {
-                    tetromino = nextTetromino;
-                    nextTetromino = new Piece();
-                    tetromino.Spawn(Grid, DroppedtetrominoeLocationGrid);
+                    piece = newPiece;
+                    newPiece = new Piece();
+                    piece.Spawn(Grid, DroppedtetrominoeLocationGrid);
 
                     IsDropped = false;
                 }
@@ -102,14 +99,27 @@ namespace Tetris
                     if (DroppedtetrominoeLocationGrid[0, j] == 1)
                         return;
                 }
-                CheckLine(difficultyLevel, render);
+
+                piece.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
+
+                // Update the game (Check for cleared lines)
+                CheckLine(difficultyLevel);
+
+                // Render(Draw borders)
+                render.DrawBorder();
+
+                // Render(Draw game)
+                render.Draw(Grid, DroppedtetrominoeLocationGrid);
+
+                // Render(Draw GUI)
+                render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
             }
         }
         
         /// <summary>
         /// Creates CheckLine Method
         /// </summary>
-        public void CheckLine(int difficultyLevel, Render render)
+        public void CheckLine(int difficultyLevel)
         {
             for (int i = 0; i < 23; i++)
             {
@@ -136,10 +146,7 @@ namespace Tetris
                     else if (Combo > 3)
                         Score += 300 * Combo * Level;
 
-                    ClearLine(Combo, i, j, render);
-
-                    // Update score and level
-                    render.DrawScoreAndLevel(Level, Score, LinesCleared, Combo);
+                    ClearLine(Combo, i, j);
                 }
             }
 
@@ -164,7 +171,7 @@ namespace Tetris
         /// <param name="combo"></param>
         /// <param name="i"></param>
         /// <param name="j"></param>
-        public void ClearLine(int combo, int i, int j, Render render)
+        public void ClearLine(int combo, int i, int j)
         {
             for (j = 0; j < 10; j++)
             {
@@ -191,13 +198,15 @@ namespace Tetris
             }
 
             for (int k = 0; k < 23; k++)
+            {
                 for (int l = 0; l < 10; l++)
+                {
                     if (newdroppedtetrominoeLocationGrid[k, l] == 1)
                     {
                         DroppedtetrominoeLocationGrid[k, l] = 1;
                     }
-
-            render.Draw(Grid, DroppedtetrominoeLocationGrid);
+                }
+            }
         }
     }
 }

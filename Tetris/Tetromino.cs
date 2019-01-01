@@ -43,18 +43,13 @@ namespace Tetris
             // Make a random new tetromino
             Shape = Tetrominoes[random];
 
-            // A little debug
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine($"\n\n\nDebug:\nColor {CurrentColor}       \nType {random}");
-
-            // Draw borders
-            render.DrawBorder();
-
+            // This is the new tetromino that appears on the side of the GUI
             // Clear old tetromino from GUI
             render.ClearOldTetromino();
 
             // Draw new tetromino on the side GUI
             render.DrawNewTetromino(Shape);
+
         }
     }
 }

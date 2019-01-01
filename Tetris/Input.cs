@@ -17,7 +17,7 @@ namespace Tetris
         /// <param name="Grid"></param>
         /// <param name="DroppedtetrominoeLocationGrid"></param>
         public void Readkey(int[,] Grid, int[,] DroppedtetrominoeLocationGrid, 
-            Piece tetromino, bool IsKeyPressed)
+            Piece piece, bool IsKeyPressed)
         {
             if (Console.KeyAvailable)
             {
@@ -29,40 +29,37 @@ namespace Tetris
                 IsKeyPressed = false;
             }
 
-            if (Key.Key == ConsoleKey.LeftArrow && !tetromino.IsSomethingLeft
+            if (Key.Key == ConsoleKey.LeftArrow && !piece.IsSomethingLeft
                 (DroppedtetrominoeLocationGrid) && IsKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    tetromino.Location[i][1] -= 1;
+                    piece.Location[i][1] -= 1;
                 }
-                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
-            else if (Key.Key == ConsoleKey.RightArrow && !tetromino.IsSomethingRight
+            else if (Key.Key == ConsoleKey.RightArrow && !piece.IsSomethingRight
                 (DroppedtetrominoeLocationGrid) && IsKeyPressed)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    tetromino.Location[i][1] += 1;
+                    piece.Location[i][1] += 1;
                 }
-                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
             }
             if (Key.Key == ConsoleKey.DownArrow && IsKeyPressed)
             {
-                tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
+                piece.Drop(Grid, DroppedtetrominoeLocationGrid);
             }
             if (Key.Key == ConsoleKey.UpArrow && IsKeyPressed)
             {
-                for (; tetromino.IsSomethingBelow(DroppedtetrominoeLocationGrid) != true;)
+                for (; piece.IsSomethingBelow(DroppedtetrominoeLocationGrid) != true;)
                 {
-                    tetromino.Drop(Grid, DroppedtetrominoeLocationGrid);
+                    piece.Drop(Grid, DroppedtetrominoeLocationGrid);
                 }
             }
             if (Key.Key == ConsoleKey.Spacebar && IsKeyPressed)
             {
                 //rotate
-                tetromino.Rotate(DroppedtetrominoeLocationGrid);
-                tetromino.PositionUpdate(Grid, DroppedtetrominoeLocationGrid);
+                piece.Rotate(DroppedtetrominoeLocationGrid);
             }
         }
     }
