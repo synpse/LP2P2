@@ -1,1 +1,5 @@
-# LP2P2
+# LP2 Project 2
+
+## Image test
+
+![](https://picasaweb.google.com/100144729318228508782/6641671242332476817#6641671245954645602)
