@@ -57,7 +57,7 @@ namespace Tetris
             //(Grid, DroppedtetrominoeLocationGrid, tetromino, isKeyPressed));
             //thread.Start();
 
-            Update(difficultyLevel, dropTimer, piece, newPiece, input, render);
+            Gameloop(difficultyLevel, dropTimer, piece, newPiece, input, render);
 
             Console.Clear();
 
@@ -67,7 +67,7 @@ namespace Tetris
         /// <summary>
         /// Creates GameLoop
         /// </summary>
-        public void Update(int difficultyLevel, Stopwatch dropTimer, 
+        public void Gameloop(int difficultyLevel, Stopwatch dropTimer, 
             Piece piece, Piece newPiece, Input input, Render render)
         {
             // Gameloop
