@@ -2,4 +2,4 @@
 
 ## Image test
 
-![](https://picasaweb.google.com/100144729318228508782/6641671242332476817#6641671245954645602)
+![](./Images/FluxogramaTetris.png)
