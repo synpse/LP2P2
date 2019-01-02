@@ -25,6 +25,11 @@ All of the tasks are documented under the form of "commits" on our [GitHub Repos
 
 ## Proposed Solution
 
+### Project's Classes
+
+#### Program.cs
+
+
 ### Project's Flow Chart
 
 ![Flow Chart](./Images/FluxogramaTetris.png)
