@@ -40,9 +40,10 @@ This project allowed us to consolidate what was taught in class during this seme
 
 ## References
 
+
 [DM]:https://github.com/IssaMaia
 [TA]:https://github.com/synpse
 [LAMV]:https://www.ulusofona.pt/licenciatura/aplicacoes-multimedia-e-videojogos
 [ULHT]:https://www.ulusofona.pt/
-[REF1]:https://github.com/VideojogosLusofona/lp22018p2
+[REF1]:https://github.com/VideojogosLusofona/lp2_2018_p2
 [GH]:https://github.com/synpse/lp2p2
