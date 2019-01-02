@@ -45,4 +45,4 @@ This project allowed us to consolidate what was taught in class during this seme
 [LAMV]:https://www.ulusofona.pt/licenciatura/aplicacoes-multimedia-e-videojogos
 [ULHT]:https://www.ulusofona.pt/
 [REF1]:https://github.com/VideojogosLusofona/lp22018p2
-[RP]:https://github.com/synpse/lp2p2
+[GH]:https://github.com/synpse/lp2p2
