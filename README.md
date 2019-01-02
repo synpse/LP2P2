@@ -29,6 +29,83 @@ All of the tasks are documented under the form of "commits" on our [GitHub Repos
 
 #### Program.cs
 
+* Starts the program;
+
+* Calls Display() method of MainMenu.cs;
+
+#### MainMenu.cs
+
+* Displays the menu;
+
+* Calls Display() methods of Difficulty.cs, Highscores.cs, Info.cs and Credits.cs;
+
+#### Difficulty.cs
+
+* Displays the difficulty menu;
+
+* Calls Start() method of Game.cs;
+
+#### Highscores.cs
+
+* Displays the highscores;
+
+* Calls Tuple GetScores();
+
+#### Info.cs
+
+* Displays info;
+
+#### Credits.cs
+
+* Displays credits;
+
+#### Game.cs
+
+*  Creates Start(), Gameloop(), CheckLine() and ClearLine();
+
+* Start() calls Gameloop() and Display() of GameOver.cs;
+
+* Gameloop() is a loop that calls Readkey() of Input.cs, updater methods of its own class such as Checkline() and Draw(), DrawBorder() and DrawScoreAndLevel() of Render.cs;
+
+#### GameOver.cs
+
+* Displays Game over and creates Retry();
+
+* Calls AddScore() and Save() of HighscoresManager.cs, calls retry, which calls Display() of Difficulty.cs and MainMenu.cs;
+
+#### HighscoresManager.cs
+
+* Creates the file HighScores.txt;
+
+* Creates HighscoresManager() constructor;
+
+* Creates AddScore(), Save(), Tuple GetScores() and SortList();
+
+#### Input.cs
+
+* Reads input;
+
+* Creates Readkey();
+
+#### Render.cs
+
+* Draws game;
+
+* Creates Draw(), DrawBorder(), DrawScoreAndLevel(), DrawNewTetromino() and ClearOldTetromino();
+
+#### Square.cs
+
+* Creates Square() constructor;
+
+#### Tetromino.cs
+
+* Creates Tetromino() constructor;
+
+#### Piece.cs
+
+* Inherits from Tetromino.cs;
+
+* Creates PositionUpdate(), Spawn(), Drop(), Rotate(), TransformMatrix(), IsSomethingBelow(), nullable IsOverlayBelow(), IsSomethingLeft(), nullable IsOverlayLeft(), IsSomethingRight(), nullable IsOverlayRight();
 
 ### Project's Flow Chart
 
