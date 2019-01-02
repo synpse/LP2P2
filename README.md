@@ -20,7 +20,7 @@
 
 This project was made by a group of two and all the tasks were equally distributed by both of us. Some of the tasks were completed by either one member of the group or the other, while others were done by both of us together.
 
-All the tasks are documented under the form of "commits" on our [GitHub Repository][GH].
+All of the tasks are documented under the form of "commits" on our [GitHub Repository][GH].
 
 
 ## Proposed Solution
