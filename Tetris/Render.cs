@@ -140,8 +140,6 @@ namespace Tetris
             Console.SetCursorPosition(25, 1);
             Console.WriteLine("Score: " + score);
             Console.SetCursorPosition(25, 2);
-            Console.WriteLine("LinesCleared: " + linesCleared);
-            Console.SetCursorPosition(45, 2);
             Console.WriteLine("Combo: " + combo);
         }
     }
