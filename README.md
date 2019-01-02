@@ -7,14 +7,7 @@
 * [Diogo Maia][DM], nº;
 * [Tiago Alves][TA], nº a21701031;
 
-
-### Tasks Repartition
-
-This project was made by a group of two and all the tasks were equally distributed by both of us. Some of the tasks were completed by either one member of the group or the other, while others were done by both of us together.
-
-All of the tasks are documented under the form of "commits" on our [GitHub Repository][GH].
-
-### Other Information
+### Meta
 
 * [The Project's Statement][REF1];
 
@@ -22,6 +15,11 @@ All of the tasks are documented under the form of "commits" on our [GitHub Repos
 
 * [The University][ULHT];
 
+### Tasks Repartition
+
+This project was made by a group of two and all the tasks were equally distributed by both of us. Some of the tasks were completed by either one member of the group or the other, while others were done by both of us together.
+
+All of the tasks are documented under the form of "commits" on our [GitHub Repository][GH].
 
 ## Proposed Solution
 
