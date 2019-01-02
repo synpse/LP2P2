@@ -18,7 +18,7 @@
 
 ### Tasks Repartition
 
-This project was made by a group of two, therefore all the tasks were equally distributed by both of us. Some of the tasks were completed by one of us alone, while others were done by both of us together.
+This project was made by a group of two and all the tasks were equally distributed by both of us. Some of the tasks were completed by one of us alone, while others were done by both of us together.
 
 All the tasks are documented under the form of "commits" on our [GitHub Repository][GH].
 
