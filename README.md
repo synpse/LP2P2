@@ -4,7 +4,7 @@
 
 ### Authors
 
-* [Diogo Maia][DM], nº;
+* [Diogo Maia][DM], nº a21704165;
 * [Tiago Alves][TA], nº a21701031;
 
 ### Meta
