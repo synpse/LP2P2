@@ -28,6 +28,8 @@ namespace Tetris
 
             bool chosingMenu = true;
 
+            //Creates a Menu for the player
+            //Where he chooses the difficulty of the game
             while (chosingMenu)
             {
                 Console.Clear();

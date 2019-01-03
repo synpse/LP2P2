@@ -2,8 +2,15 @@
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates Highscore class
+    /// </summary>
     class Highscores
     {
+        /// <summary>
+        /// Creates Display Class where it shows
+        /// the score of the player
+        /// </summary>
         public void Display()
         {
             HighscoresManager hsm = new HighscoresManager();

@@ -2,8 +2,14 @@
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates the Info Class
+    /// </summary>
     class Info
     {
+        /// <summary>
+        /// Creates The display Menu where it shows the info of the game
+        /// </summary>
         public void Display()
         {
             Console.Clear();

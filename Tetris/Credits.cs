@@ -2,8 +2,15 @@
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates the Credits Class
+    /// </summary>
     class Credits
     {
+        /// <summary>
+        /// Creates the method Display where it
+        /// shows the credits of the game
+        /// </summary>
         public void Display()
         {
             Console.Clear();

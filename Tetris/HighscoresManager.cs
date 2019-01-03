@@ -4,12 +4,20 @@ using System.IO;
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates HighscoreManager Class
+    /// </summary>
     class HighscoresManager
     {
         private List<Tuple<string, float, string>> highscores;
 
         private string filename = "";
 
+        /// <summary>
+        /// Creates the HighscoreManger Constructor where it saves or creates
+        /// a new file to store the scores
+        /// </summary>
+        /// <param name="filename"></param>
         public HighscoresManager(string filename = "HighScores.txt")
         {
             ///Inicializa o ficheiro com o nome do ficheiro fornecido no 
@@ -64,6 +72,12 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates the AddScore Method
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="score"></param>
+        /// <param name="difficulty"></param>
         public void AddScore(string name, float score, string difficulty)
         {
             ///Cria e instância um novo objecto que guarda a nova pontuação.
@@ -84,6 +98,9 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates the Save Method
+        /// </summary>
         public void Save()
         {
             ///Cria uma variável para guardar o texto da lista
@@ -100,6 +117,10 @@ namespace Tetris
             File.WriteAllText(filename, text);
         }
 
+        /// <summary>
+        /// Creates the GetScore method
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Tuple<string, float, string>> GetScores()
         {
             ///Pecorre todas as pontuações na lista.
@@ -110,6 +131,9 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates the SortList Method
+        /// </summary>
         private void SortList()
         {
             ///Ordena os elementos da lista de forma descendente

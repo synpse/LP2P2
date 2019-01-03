@@ -2,8 +2,17 @@
 
 namespace Tetris
 {
+    /// <summary>
+    /// Creates the Gameover Class
+    /// </summary>
     class GameOver
     {
+        /// <summary>
+        /// Creates the display of the GameOver where it shows
+        /// the difficulty of the game and the score the player made
+        /// </summary>
+        /// <param name="score"></param>
+        /// <param name="difficultyLevel"></param>
         public void Display(int score, int difficultyLevel)
         {
             HighscoresManager hsm = new HighscoresManager();
@@ -57,6 +66,9 @@ namespace Tetris
             }
         }
 
+        /// <summary>
+        /// Creates a retry method 
+        /// </summary>
         public void Retry()
         {
             Difficulty difficulty = new Difficulty();
