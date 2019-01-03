@@ -107,12 +107,12 @@ All of the tasks are documented under the form of "commits" on our [GitHub Repos
 
 ### Project's Flow Chart
 
-![Flow Chart](./Images/FluxogramaTetris.png)
+![Flow Chart](./Images/FlowChartTetris.png)
 
 
 ### Project's UML Diagram
 
-![Flow Chart](./Images/...)
+![UML](./Images/UMLTetris.png)
 
 ## Conclusions
 
