@@ -120,9 +120,11 @@ This project allowed us to consolidate what was taught in class during this seme
 
 ## References
 
-* The C# Player's Guide - RB Whitaker (Starbound Software);
+* Whitaker, R. B. The C# Player's Guide (3rd Edition). Starbound Software;
 
-* C# 7.0 in a Nutshell: The Definitive Reference -  Joseph Albahari and Ben Albahari;
+* Freeman, E., Robson, E., Bates, B., & Sierra, K. Head First Design Patterns. O'Reilly Media;
+
+* Joseph Albahari and Ben Albahari. C# 7.0 in a Nutshell: The Definitive Reference. O’Reilly Media;
 
 * https://docs.microsoft.com/en-us/dotnet/csharp/
 
